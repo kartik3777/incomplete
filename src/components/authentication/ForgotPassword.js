@@ -3,96 +3,96 @@ import { Link } from 'react-router-dom';
 import './styl.css';
 
 function ForgotPassword(){
-    const [data, setData] =useState({
-        email: "",
-        password: "",
-        confirmpassword: "", 
-        OTP: "",
-    })
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+const [confirmpassword, setConfirmpassword] = useState("");
+const [OTP, setOTP] = useState("");
+const [OTPData, setOTPData] = useState(null);
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmpassword, setConfirmpassword] = useState("");
-    const [OTP, setOTP] = useState("");
-    const [OTPData, setOTPData] = useState(null);
-    
-    function handleOTP(){   
-        if (!data.email) {
-            alert("Please provide an email address.");
-            return;
-        }
-        fetch('https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/email', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email: data.email }),
-        })
-        .then(response => {
-            if (response.ok) {
-                return response.json(); // assuming the response is JSON
-            } else {
-                throw new Error('Failed to send OTP');
-            }
-        })
-        .then(data => {
-            // handle successful response here
-            console.log(data);
-            setOTP(data); 
-            alert("OTP sent successfully!");
-        })
-        .catch(error => {
-            console.error('Error sending OTP:', error);
-            alert("Failed to send OTP. Please try again.");
-        });
-  }
+const [data, setData] =useState({
+    email: "",
+    password: "",
+    confirmpassword: "",   
+    OTP: "",
+})
 
-    
-    function handleChange(e){
-        const {name, value} = e.target;
-        if(name ==="OTP"){
-         setOTPData(value)
-        }
-        setData((prevValue) => {
-             return {
-                 ...prevValue,
-                 [name] :value
-             }
-        })
+function handleChange(e){
+    const {name, value} = e.target;
+    if(name ==="OTP"){
+     setOTP(value)
     }
+      setData((prevValue) => {
+         return {
+             ...prevValue,
+             [name] :value
+         }
+      })
+}
 
-    function handleClick(){
-        if (
-            !data.email ||
-            !OTP ||
-            !data.password ||
-            !data.confirmpassword
-        ) {
-            alert("Please fill all the details");
-            return;
+function handleOTP(){   
+    if (!data.email) {
+        alert("Please provide an email address.");
+        return;
+    }
+    fetch('https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/email', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: data.email }),
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json(); // assuming the response is JSON
+        } else {
+            throw new Error('Failed to send OTP');
         }
-    
-        if (data.password !== data.confirmpassword) {
-            alert("Passwords do not match");
-            return;
-        }
-        setEmail(data.email);
-        setPassword(data.password);
-        setConfirmpassword(data.confirmpassword);
-        setOTP(data.OTP);
-    
-    if (!OTPData) {
-        alert("OTP not received. Please send OTP.");
+    })
+    .then(data => {
+        // handle successful response here
+        console.log(data);
+        setOTPData(data); 
+        alert("OTP sent successfully!");
+    })
+    .catch(error => {
+        console.error('Error sending OTP:', error);
+        alert("Failed to send OTP. Please try again.");
+    });
+}
+
+function handleClick(){
+
+    if (
+        !data.email ||
+        !OTP ||
+        !data.password ||
+        !data.confirmpassword
+    ) {
+        alert("Please fill all the details");
         return;
     }
 
-    if (data.OTP !== OTPData) {
+    if (data.password !== data.confirmpassword) {
+        alert("Passwords do not match");
+        return;
+    }  
+    setEmail(data.email);
+    setPassword(data.password);
+    setConfirmpassword(data.confirmpassword);
+    setOTP(data.OTP);
+
+    if (!OTPData || !OTPData.otp) {
+        alert("OTP not received. Please send OTP first.");
+        return;
+    }
+
+    if (data.OTP !== OTPData.otp) {
         alert("OTP verification failed. Please try again.");
         return;
     }
 
-    fetch('https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/', {
-        method: 'PATCH',
+    fetch('https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/forgotPassword', {
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
@@ -101,11 +101,12 @@ function ForgotPassword(){
     .then(response => {
         if (response.ok) {
             // Reset successful
-            alert("Successfully changed the password! You can now login.");
+            alert("Successfully changed! You can now login.");
             // Optionally, redirect to login page or perform other actions
         } else {
-            // Reset failed, handle error
+            // Registration failed, handle error
             alert("Registration failed. Please try again.");
+
         }
     })
     .catch(error => {
@@ -116,12 +117,11 @@ function ForgotPassword(){
         {
             email: "",
             password: "",
-            confirmpassword: "", 
+            confirmpassword: "",
             OTP: "",
         }
     )
    }
-
     return(
         <div className='login-position'>
         <div className='login-box-2'>
@@ -145,10 +145,10 @@ function ForgotPassword(){
                     <label>Confirm-Password</label>
                  </div>
                 </div>
-                <button onClick={handleClick} className='btn'>Reset Password</button>    
+                <Link to='/SignIn'><button onClick={handleClick} className='btn'>Reset Password</button></Link>
         </div>
         </div>
     )
 }
 
-export default ForgotPassword;
+export default ForgotPassword;

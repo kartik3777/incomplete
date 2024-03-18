@@ -3,13 +3,15 @@ import { Link } from "react-router-dom";
 import "./styl.css";
 
 function SignIn(props) {
+ const [ikartik, setIkartik] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isAuth, setAuthorized] = useState(false);
   const [iskon, setIsKon] = useState("user");
-  const [loginData, setLoginData] = useState({});
+  const [roll, setRoll] = useState("");
+ 
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -17,26 +19,22 @@ function SignIn(props) {
 
   function handleFaculty() {
     setIsKon("faculty");
-    // if(isAuth) {
-    //   props.sendDataToParent(isAuth, iskon);
-    // }
     document.getElementById("prof-hai").style.borderTop ="2px solid aqua";
     document.getElementById("bachha-hai").style.borderTop ="none";
   }
   function handleStudent(){
+    setIsKon("user");
     document.getElementById("prof-hai").style.borderTop ="none";
     document.getElementById("bachha-hai").style.borderTop ="2px solid aqua";
   }
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
+  const handleSubmit = async () => {
     if (!email || !password) {
       setError("Email and password are required!");
       return; // Exit early if validation fails
     }
 
-    const url = "https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui-eight.vercel.app/api/user/login";
+    const url = "https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/login";
     try {
       const response = await fetch(url, {
         method: "POST",
@@ -46,11 +44,12 @@ function SignIn(props) {
         body: JSON.stringify({ email, password }),
       });
 
-      const data = await response.json();
-      setLoginData(data);
-      console.log(data);
+      const resp = await response.json();
+      setIkartik(resp.data.user);
+      console.log(ikartik);
+      setRoll(resp.data.user.rollno);
 
-      if (data.status === "success") {
+      if (resp.status === "success") {
         // Clear input fields after successful authentication
         setEmail("");
         setPassword("");
@@ -70,31 +69,23 @@ function SignIn(props) {
       );
     }
   };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSubmit();
+    }
+  };
+
   useEffect(() => {
     // console.log("isAuth:", isAuth);
   }, [isAuth]);
 
-  props.sendDataToParent(isAuth, iskon, loginData);
-  console.log(`this is login data that im sending from signinjs ${loginData}`);
+  props.sendDataToParent(isAuth, iskon, ikartik);
+  console.log(ikartik);
+  console.log(`this is login data that im sending from signinjs ${ikartik}`);
 
   return (
-    // <div className="my-login-page">
-    //   <div className="my-login-box">
-    //   <div className='my-login-heading'>Login</div>
-    //   <div className="my-login-cont">
-    //      <div className="my-input-box">
-    //      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required spellCheck="false" />
-    // //         <label>Enter email</label>
-    //      </div>
-    //      <div className="my-input-box">
-    //      <input className='second-input-field' type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} required spellCheck="false" />
-    // //         <label>Password</label>
-    //      </div>
-    //   </div>
-    //   </div>
-
-    // </div>
-
+  
     <div className="login-position">
       <div className="login-box">
         <div className="upar-vale-buttons">
@@ -120,6 +111,7 @@ function SignIn(props) {
               onChange={(e) => setPassword(e.target.value)}
               required
               spellCheck="false"
+              onKeyDown={handleKeyDown} // Attach handleKeyDown here
             />
             <label>Password</label>
           </div>
@@ -136,7 +128,7 @@ function SignIn(props) {
             New Student? SignUp
           </Link>
           <Link className="a1" to="/ForgotPassword">
-            ForgotPassword?
+            Forgot Password?
           </Link>
         </div>
       </div>
