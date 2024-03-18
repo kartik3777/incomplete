@@ -6,7 +6,8 @@ function ForgotPassword(){
     const [data, setData] =useState({
         email: "",
         password: "",
-        confirmPassword: "",      
+        confirmpassword: "", 
+        OTP: "",
     })
 
     const [email, setEmail] = useState("");
@@ -61,7 +62,6 @@ function ForgotPassword(){
     }
 
     function handleClick(){
-
         if (
             !data.email ||
             !OTP ||
@@ -81,18 +81,18 @@ function ForgotPassword(){
         setConfirmpassword(data.confirmpassword);
         setOTP(data.OTP);
     
-    if (!OTPData || !OTPData.otp) {
-        alert("OTP not received. Please send OTP first.");
+    if (!OTPData) {
+        alert("OTP not received. Please send OTP.");
         return;
     }
 
-    if (data.OTP !== OTPData.otp) {
+    if (data.OTP !== OTPData) {
         alert("OTP verification failed. Please try again.");
         return;
     }
 
-    fetch('https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/signup', {
-        method: 'POST',
+    fetch('https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/', {
+        method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
         },
@@ -100,11 +100,11 @@ function ForgotPassword(){
     })
     .then(response => {
         if (response.ok) {
-            // Registration successful
-            alert("Successfully registered! You can now login.");
+            // Reset successful
+            alert("Successfully changed the password! You can now login.");
             // Optionally, redirect to login page or perform other actions
         } else {
-            // Registration failed, handle error
+            // Reset failed, handle error
             alert("Registration failed. Please try again.");
         }
     })
@@ -117,10 +117,10 @@ function ForgotPassword(){
             email: "",
             password: "",
             confirmpassword: "", 
+            OTP: "",
         }
     )
    }
-
 
     return(
         <div className='login-position'>
@@ -133,7 +133,7 @@ function ForgotPassword(){
                  </div>
                  <button onClick={handleOTP} className='otpButton'>Send OTP</button>
                  <div className='input-field'>
-                    <input  onChange={handleChange} value={OTP} name='OTP' type="text" required="required" /> 
+                    <input  onChange={handleChange} value={data.OTP} name='OTP' type="text" required="required" /> 
                     <label>Enter OTP</label>
                  </div>
                  <div className='input-field'>
@@ -141,7 +141,7 @@ function ForgotPassword(){
                     <label>Create-Password</label>
                  </div>
                  <div className='input-field'>
-                    <input onChange={handleChange} value={data.confirmPassword} name='confirmPassword' type="password" required="required" /> 
+                    <input onChange={handleChange} value={data.confirmpassword} name='confirmpassword' type="password" required="required" /> 
                     <label>Confirm-Password</label>
                  </div>
                 </div>
