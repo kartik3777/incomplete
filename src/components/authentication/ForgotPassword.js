@@ -82,11 +82,11 @@ function ForgotPassword(){
         setOTP(data.OTP);
     
     if (!OTPData) {
-        alert("OTP not received. Please send OTP first.");
+        alert("OTP not received. Please send OTP.");
         return;
     }
 
-    if (data.OTP !== OTP) {
+    if (data.OTP !== OTPData) {
         alert("OTP verification failed. Please try again.");
         return;
     }
@@ -121,7 +121,6 @@ function ForgotPassword(){
         }
     )
    }
-
 
     return(
         <div className='login-position'>
