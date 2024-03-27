@@ -7,7 +7,7 @@
     width: 100vw;
     height: auto;
     min-height: 100vh;
-    background-color: rgb(141, 115, 255);
+    background: linear-gradient(90deg, #54aabd, #c9e3e6, #0b243f);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,21 +52,31 @@
   flex-direction: column;
 align-items: end;
 }
-.choose button{
-  border: none;
-  /* height: 35px; */
-  width: 100%;
-  font-size: 20px;
-  background-color: transparent;
-  border: 2px solid aqua;
-  color:aqua;
-  /* margin-top: 10px; */
-  padding: 5px 0px;
+.btns{
+  height:47px;
+  width:380px;
+  /* background: linear-gradient(to right, #FF5F6D, #FFC371); */
+  background:linear-gradient(to right,#244186,#49a09d);
+  
   cursor: pointer;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ margin: 10px;
+ font-size: 28px;
+ font-weight: 700px;
+ border-radius: 22px;
+ transition: 0.3s;
+ letter-spacing: 0.1em;
+}
+.btns:hover{
+  letter-spacing:0.25em;
+  background: linear-gradient(to right,#b1f4e2,#0ddbe6);
+  color: rgb(22, 118, 107);
 }
 .login-box{
   /* z-index: 0; */
-  height: 420px;
+  height: auto;
   width: 400px;
 background-color: #060b23;
   padding: 15px;

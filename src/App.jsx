@@ -28,6 +28,7 @@ import EnrolledStudents from "./pages/EnrolledStudents";
 import ProfProfile from "./pages/ProfProfile";
 import HomeFaculty from "./pages/HomeFaculty";
 import ForgotPassword from "./components/authentication/ForgotPassword";
+import OneProfProjects from "./components/Student/OneProfProjects";
 
 
 function App() {
@@ -38,7 +39,14 @@ function App() {
   const[logedInStudentData, setLogedInStudentData] = useState(null);
     // const [loginDetail, setLoginDetail] = useState("");
     const [studentReq, setStudentReq] = useState("");
+    const [profId, setProfId] = useState("");
     const my =[];
+
+    function handleProfId(x){
+     setProfId(x);
+     console.log(x);
+     console.log("profid in appjsx is: "+profId);
+    }
 
     function handleReq(array){
       console.log("data recieved in app.jsx");
@@ -75,17 +83,23 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<NavBar who={kon} />}>
-                <Route path="Project_list_prof" element={<Project_list_prof req ={handleReq} />} />
+                <Route path="Project_list_prof" element={<Project_list_prof
+                profId ={profId}
+                 req ={handleReq} 
+                 />} />
                 {/* <Route path="DataTable" element={<DataTable />} /> */}
-                <Route path="NewProject" element={<NewProject />} />
+                <Route path="NewProject" element={<NewProject profId={profId} />} />
                 <Route path="Requests" element={<Requests my={my}/>} />
-                <Route path="ProfProfile" element={<ProfProfile />} />
+                <Route path="ProfProfile" element={<ProfProfile profId={profId} />} />
                 <Route index element={<HomeFaculty />} />
                 <Route path="Home" element={<HomeFaculty />} />
                 <Route path="EnrolledStudents" element={<EnrolledStudents />} />
                 <Route path="ContactUs" element={<ContactUs />} />
                 {/* <Route path="LogOut" element={<LogOut />} /> */}
-                <Route path="UserProfile" element={<UserProfile logedInStudentData= {logedInStudentData} />} />
+                <Route path="UserProfile" element={<UserProfile
+                profId ={profId}
+                 logedInStudentData= {logedInStudentData} 
+                 />} />
                 <Route path="LogOut" element={<LogOut onLogout={handleLogout} />} />
                 {/* <Route path="UserProfile" element={<UserProfile loginDetail= {loginDetail} />} /> */}
               </Route>
@@ -108,6 +122,7 @@ function App() {
                   <Route path="Ce" element={<Ce />} />
                 </Route>
                 <Route path="ContactUs" element={<ContactUs />} />
+                <Route path="OneProfProjects" element={<OneProfProjects />} />
                 <Route index element={<Home />} />
                 <Route path="Home" element={<Home />} />
                 <Route path="LogOut" element={<LogOut onLogout={handleLogout} />} />
@@ -136,9 +151,15 @@ function App() {
       <>
         <BrowserRouter>
           <Routes>
-            <Route index element={<SignIn sendDataToParent={getData} />} />
+            <Route index element={<SignIn
+             sendDataToParent={getData}
+             handleProfId ={handleProfId}
+             />} />
             <Route path="SignUp" element={<SignUp />} />
-            <Route path="SignIn" element={<SignIn sendDataToParent={getData} />} />
+            <Route path="SignIn" element={<SignIn
+             sendDataToParent={getData}
+             handleProfId ={handleProfId}
+             />} />
             <Route path="ForgotPassword" element={<ForgotPassword />} />
 
 

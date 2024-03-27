@@ -28,6 +28,10 @@ function TotalProjects(props) {
 
   const handleSubmit = async (e) => {
 
+    if(props.total>=5){
+      alert("You have exceeded Projects Request Limit");
+      return;
+    }
     e.preventDefault();
     const btnData = document.getElementById("request-vala-button").innerText;
     if(btnData === "Request"){
@@ -182,12 +186,13 @@ function ProjectCategory(props) {
                 preReq={item.openfor}
                 resume={item.resumerequired}
                 students={item.studentRegistered}
-                total={item.maxstudents}
+               
                 isResume={item.resumerequired}
                 isRequest={item.isRequest}
                 logedInStudentData={props.logedInStudentData}
                 id = {props.ProjectDetails}
                 rollno={props.rollno}
+                total={props.logedInStudentData.projectsRequested.length}
               />
             );
           })

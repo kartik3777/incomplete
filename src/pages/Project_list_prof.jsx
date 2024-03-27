@@ -22,7 +22,7 @@ function TotalProjects(props) {
   const expand = () => {
     const projectDiv = document.getElementById(`project-${props.index}`);
     const button = document.getElementById(`expand-button-${props.index}`);
-    if(projectDiv.style.height == '380px'){
+    if(projectDiv.style.height === '380px'){
       button.innerText ="Show More";
       projectDiv.style.height = '200px';
     }
@@ -70,7 +70,7 @@ function TotalProjects(props) {
             <span style={{ color: 'blue', fontWeight: "530" }}>Open for: <span style={{ color: 'black', fontWeight: "500", fontSize: "15px" }}>{props.batches}</span></span>
             <span style={{ color: 'blue', fontWeight: "500" }}>Resume required: <span style={{ color: 'black', fontWeight: "500", fontSize: "15px" }}>{props.resume}</span></span>
             <span style={{ color: 'blue', fontWeight: "500" }}>Total Students: <span style={{ color: 'black', fontWeight: "500", fontSize: "15px" }}>{props.students}</span></span>
-            <span style={{ color: 'blue', fontWeight: "500" }}>Additional Details: <span style={{ color: 'black', fontWeight: "500", fontSize: "15px" }}>{props.additional}</span></span>
+            <span style={{ color: 'blue', fontWeight: "500" }}>Project Category: <span style={{ color: 'black', fontWeight: "500", fontSize: "15px" }}>{props.projectCategory}</span></span>
           </div>
           <div className="second-details">
             <h4 style={{ color: 'blue' }}>Cpi Required: <span style={{ color: 'black', fontWeight: "500", fontSize: "15px" }}>{props.cpi}</span></h4>
@@ -87,30 +87,41 @@ function TotalProjects(props) {
 }
 
 
+
+
 function Project_list_prof(props) {
+
+
   const [facultyData, setFacultyData] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/faculty/abhas'); //"abhas" should be replaced by "unique id" of professor signed in
-        if (!response.ok) {
-          throw new Error('Failed to fetch faculty data');
-        }
-        const data = await response.json();
-        setFacultyData(data);
-        console.log("data in prof project list");
-        console.log(data);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching faculty data:', error);
-        setLoading(false);
+  
+  const fetchData = async () => {
+    try {
+      const uniqueID = props.profId;
+      console.log("unique id in projects listsis: "+ uniqueID);
+      const url = `https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/faculty/${uniqueID}`;
+      const response = await fetch(url); //"abhas" should be replaced by "unique id" of professor signed in
+      if (!response.ok) {
+        throw new Error('Failed to fetch faculty data');
       }
-    };
+      const data = await response.json();
+      setFacultyData(data);
+      // console.log("data in prof project list");
+      // console.log(data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching faculty data:', error);
+      setLoading(false);
+    }
+  };
+  
 
-    fetchData();
-  }, []);
+
+  fetchData();
+  // useEffect(() => {
+  
+  //   fetchData();
+  // }, []);
 
   // if (loading) {
   //   return <Loader />;
@@ -129,7 +140,7 @@ function Project_list_prof(props) {
         {loading ? ( 
         <Loader  />
       ) : (
-        facultyData && facultyData.projects.map((item, index) => (
+        facultyData.projects && facultyData.projects.map((item, index) => (
           
           <TotalProjects
             key={index}
@@ -137,7 +148,8 @@ function Project_list_prof(props) {
             name={item.name}
             details={item.description}
             cpi={item.cpirequired}
-            batches={item.offeredByProf}
+            projectCategory ={item.projectCategory}
+            batches={item.openfor}
             preReq={item.prereg} // Joining prerequisites array into a comma-separated string
             resume={item.resumerequired ? 'Yes' : 'No'}
             students={item.maxstudents}

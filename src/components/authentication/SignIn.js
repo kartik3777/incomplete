@@ -1,36 +1,38 @@
-
-
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./styl.css";
+import axios from "axios";
 
 function SignIn(props) {
  const [ikartik, setIkartik] = useState(null);
-  const [showPassword, setShowPassword] = useState(false);
+  // const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isAuth, setAuthorized] = useState(false);
   const [iskon, setIsKon] = useState("user");
   const [roll, setRoll] = useState("");
+  const [otpFromApi, setOtpFromApi] = useState();
  
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+  // const togglePasswordVisibility = () => {
+  //   setShowPassword(!showPassword);
+  // };
 
   function handleFaculty() {
     setIsKon("faculty");
-    // if(isAuth) {
-    //   props.sendDataToParent(isAuth, iskon);
-    // }
+    setEmail("");
+    setPassword("");
     document.getElementById("prof-hai").style.borderTop ="2px solid aqua";
     document.getElementById("bachha-hai").style.borderTop ="none";
   }
+
   function handleStudent(){
     setIsKon("user");
     document.getElementById("prof-hai").style.borderTop ="none";
     document.getElementById("bachha-hai").style.borderTop ="2px solid aqua";
+    setEmail("");
+    setPassword("");
   }
 
   const handleSubmit = async (event) => {
@@ -81,74 +83,184 @@ function SignIn(props) {
   }, [isAuth]);
 
   props.sendDataToParent(isAuth, iskon, ikartik);
-  // console.log(ikartik);
-  // console.log(`this is login data that im sending from signinjs ${ikartik}`);
 
-  return (
-    // <div className="my-login-page">
-    //   <div className="my-login-box">
-    //   <div className='my-login-heading'>Login</div>
-    //   <div className="my-login-cont">
-    //      <div className="my-input-box">
-    //      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required spellCheck="false" />
-    // //         <label>Enter email</label>
-    //      </div>
-    //      <div className="my-input-box">
-    //      <input className='second-input-field' type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} required spellCheck="false" />
-    // //         <label>Password</label>
-    //      </div>
-    //   </div>
-    //   </div>
 
-    // </div>
+  function handleOTP(){   
+    if (!email) {
+        alert("Please provide an email address.");
+        return;
+    }
+    fetch('https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/email', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: email }),
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json(); // assuming the response is JSON
+        } else {
+            throw new Error('Failed to send OTP');
+        }
+    })
+    .then(data => {
+        // handle successful response here
+        console.log(data);
+        setOtpFromApi(data.otp)
+        // setOTPData(data); 
+        alert("OTP sent successfully!");
+    })
+    .catch(error => {
+        console.error('Error sending OTP:', error);
+        alert("Failed to send OTP. Please try again.");
+    });
+}
 
-    <div className="login-position">
-      <div className="login-box">
-        <div className="upar-vale-buttons">
-          <button onClick={handleStudent} id="bachha-hai">Student</button>
-          <button id="prof-hai" onClick={handleFaculty}>faculty</button>
-        </div>
-        <div className="login-heading">Login</div>
-        <div className="cont2">
-          <div className="input-field">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              spellCheck="false"
-            />
-            <label>Enter email</label>
+const fetchData = async () => {
+  try {
+   const uniqueId =  email.split('@')[0];
+   const url = `https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/faculty/${uniqueId}`
+   const response = await axios.get(url);
+
+    // const data = await response.json();
+    console.log(response);
+   
+    props.handleProfId(uniqueId);
+    alert("yes, you are there")
+    // setLoading(false);
+  } catch (error) {
+    console.error('Error fetching faculty data:', error);
+    alert("not registered");
+    // setLoading(false);
+  }
+};
+
+function handleFacultyOtp(){
+   
+  if(otpFromApi == password){
+ 
+       fetchData();
+  
+
+      setAuthorized(true);
+
+  }else{
+    setAuthorized(false);
+  }
+ 
+}
+
+
+
+  if(iskon ==="user"){
+     
+    return (
+      <div className="login-position">
+        <div className="login-box">
+          <div className="upar-vale-buttons">
+            <button onClick={handleStudent} id="bachha-hai">Student</button>
+            <button id="prof-hai" onClick={handleFaculty}>faculty</button>
           </div>
-          <div className="input-field">
-            <input
-              type={showPassword ? "text" : "password"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              spellCheck="false"
-            />
-            <label>Password</label>
+          <div className="login-heading">Login</div>
+          <div className="cont2">
+            <div className="input-field">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                spellCheck="false"
+              />
+              <label>Enter email</label>
+            </div>
+            <div className="input-field">
+              <input
+              
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                spellCheck="false"
+              />
+              <label id="password-label">Password</label>
+            </div>
           </div>
-        </div>
-        {error && <div className="error">{error}</div>}
-
-        <div className="choose">
-          <button className="btns" type="submit" onClick={handleSubmit}>
-            Login
-          </button>
-        </div>
-        <div className="btm">
-          <Link className="a" to="/SignUp">
-            New Student? SignUp
-          </Link>
-          <Link className="a1" to="/ForgotPassword">
-            ForgotPassword?
-          </Link>
+          {error && <div className="error">{error}</div>}
+  
+          <div className="choose">
+            <button className="btns" type="submit" onClick={handleSubmit}>
+              Login
+            </button>
+          </div>
+          <div className="btm">
+            <Link className="a" to="/SignUp">
+              New Student? SignUp
+            </Link>
+            <Link className="a1" to="/ForgotPassword">
+              ForgotPassword?
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+
+  }else{
+    return (
+      <div className="login-position">
+        <div className="login-box">
+          <div className="upar-vale-buttons">
+            <button onClick={handleStudent} id="bachha-hai">Student</button>
+            <button id="prof-hai" onClick={handleFaculty}>faculty</button>
+          </div>
+          <div className="login-heading">Login</div>
+          <div className="cont2">
+            <div className="input-field">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                spellCheck="false"
+              />
+              <label>Enter email</label>
+              
+            </div>
+            <button onClick={handleOTP} className='otpButton'>Send OTP</button>
+            <div className="input-field">
+              <input
+              // id="password-input"
+                type="text"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                spellCheck="false"
+              />
+              <label id="password-label">Enter otp</label>
+            </div>
+          </div>
+          {error && <div className="error">{error}</div>}
+  
+          <div className="choose">
+            <button className="btns" type="submit" onClick={handleFacultyOtp}>
+              Login
+            </button>
+          </div>
+          <div className="btm">
+            <Link className="a" to="/SignUp">
+              New Student? SignUp
+            </Link>
+            <Link className="a1" to="/ForgotPassword">
+              ForgotPassword?
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+
+
 }
 
 export default SignIn;

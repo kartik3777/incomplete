@@ -32,7 +32,6 @@ function ProfCard(props){
 
 
 function Prof(props) {
-
     const [facultyData, setFacultyData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [kartik, setKartik] = useState("Computer Science And Engineering")

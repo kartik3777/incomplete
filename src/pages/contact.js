@@ -37,7 +37,7 @@ const Contacts = [
     },
     {
         id: 5,
-        name: "Nilesh",
+        name: "Nilesh Maneshwar",
         phone: 8305100535,
         image:"images/nilesh.jpg",
         email: "nileshmaneshwar449@gmail.com",
@@ -58,7 +58,7 @@ const Contacts = [
         name: "Jaswanth",
         phone: 7013451713,
         image:"images/jaswanth.jpg",
-        email: "kartikkartik29957@gmail.com",
+        email: "sjaswanth22@iitk.ac.in",
         linkedInLink: "http://www.linkedin.com/in/jaswanth-sanapala-0b8b69257",
         instagramLink: "https://www.instagram.com/mr.jaswanth_11?igsh=MTNjYWpqMWMxNTBzbQ=="
     },

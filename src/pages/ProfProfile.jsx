@@ -1,14 +1,56 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import "./ProfProfile.css";
+import axios from 'axios';
 
-const ProfProfile = () => {
-  const user = {
-    name: 'Urbi Chatterji',
-    department: 'Computer Science and Engineering',
-    email: 'info@example.com',
-    office: '123 456 789',
-    researchWork: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur maiores, architecto totam amet iusto fuga exercitationem qui, ipsam consequatur repellat atque. Et iste quis perspiciatis, quisquam mollitia voluptatem ut asperiores!',
+const ProfProfile = (props) => {
+const [user, setUser] = useState({
+  name: '',
+  department: '',
+  email: '',
+  office: '',
+  researchWork: '',
+})
+
+
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const uniqueId = props.profId;
+      const url = `https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/faculty/${uniqueId}`;
+      const response = await axios.get(url);
+
+      // Handle the fetched data (e.g., update state or perform other actions)
+      console.log(response.data);
+
+      setUser({
+        name: response.data.name,
+        department: response.data.department,
+        email: response.data.email,
+        office: response.data.address,
+        researchWork: response.data.research,
+      });
+      console.log(user);
+
+     
+    } catch (error) {
+      console.error('Error fetching faculty profile:', error);
+     
+    }
   };
+
+  fetchData(); // Call the fetchData function when the component mounts
+}, [props.profId]); // Run the effect whenever props.profId changes
+
+  
+
+
+  // const user = {
+  //   name: 'Urbi Chatterji',
+  //   department: 'Computer Science and Engineering',
+  //   email: 'info@example.com',
+  //   office: '123 456 789',
+  //   researchWork: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur maiores, architecto totam amet iusto fuga exercitationem qui, ipsam consequatur repellat atque. Et iste quis perspiciatis, quisquam mollitia voluptatem ut asperiores!',
+  // };
 
   return (
     <div className='Container'>

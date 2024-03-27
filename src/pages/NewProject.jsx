@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link,useNavigate } from "react-router-dom";
 import './about.css';
 
-function NewProject() {
+function NewProject(props) {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -25,12 +25,17 @@ function NewProject() {
     });
   };
 
+
+
   const handleSubmit = async (e) => {
+
     e.preventDefault();
     try {
-      const uniqueID = 'abhas'; // Replace with the actual unique ID
+      const uniqueID = props.profId;
+      console.log("uniqueId reached to newPorject is: "+ uniqueID);
       const url = `https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/professor/${uniqueID}/createproject`;
-  
+
+     
       const response = await axios.post(url, formData);
   
       if (response.status === 201) {
@@ -38,6 +43,7 @@ function NewProject() {
         navigate('/Project_list_prof');
       } else {
         console.error('Failed to create project');
+        alert("error occured");
       }
     } catch (error) {
       console.error('Error creating project:', error.message);
