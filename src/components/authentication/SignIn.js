@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./styl.css";
 import axios from "axios";
-import Loader from '../Faculty/Loader'
 
 function SignIn(props) {
  const [ikartik, setIkartik] = useState(null);
@@ -14,7 +13,6 @@ function SignIn(props) {
   const [iskon, setIsKon] = useState("user");
   const [roll, setRoll] = useState("");
   const [otpFromApi, setOtpFromApi] = useState();
-  const [loading, setLoading] = useState(false);
  
 
   // const togglePasswordVisibility = () => {
@@ -44,7 +42,6 @@ function SignIn(props) {
       setError("Email and password are required!");
       return; // Exit early if validation fails
     }
-    setLoading(true);
 
     const url = "https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/login";
     try {
@@ -68,17 +65,14 @@ function SignIn(props) {
         setError("");
         // console.log("API call successful"); // Log success message
         setAuthorized(true);
-        setLoading(false);
         // console.log(isAuth);
         // props.sendDataToParent(isAuth);
       } else {
-        console.log("Authentication failed"); 
-        setLoading(false);// Log failure message
+        console.log("Authentication failed"); // Log failure message
         setError("Incorrect username or password!");
       }
     } catch (error) {
-      console.error("An error occurred:", error); 
-      setLoading(false);// Log the error
+      console.error("An error occurred:", error); // Log the error
       setError(
         "An error occurred while processing your request. Please try again later."
       );
@@ -163,9 +157,6 @@ function handleFacultyOtp(){
      
     return (
       <div className="login-position">
-        {loading ? (
-        <Loader />
-      ):(
         <div className="login-box">
           <div className="upar-vale-buttons">
             <button onClick={handleStudent} id="bachha-hai">Student</button>
@@ -211,7 +202,6 @@ function handleFacultyOtp(){
             </Link>
           </div>
         </div>
-        )}
       </div>
     );
 

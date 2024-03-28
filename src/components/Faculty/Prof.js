@@ -4,16 +4,8 @@ import './prof.css'
 import Loader from './Loader'
 // import '../../pages/Navbar.css'
 import  CseProfData from './main';
-import { Link } from 'react-router-dom'
-import { IoHandLeft } from 'react-icons/io5';
 
 function ProfCard(props){
-const handleOneProf =()=>{
-  const uniqueID = props.email.split('@')[0];
-  // Pass uniqueID to parent component's onClick function
-  props.onClick(uniqueID);
-}
-  
     return(
         <div className='prof-card'>
             <div className='box-1'>
@@ -33,13 +25,6 @@ const handleOneProf =()=>{
             </div>
             <div className='box-2'>
                 <p><span>Research Areas:- </span>{props.research}</p>
-            </div>
-            <div className='handleOneProf'>
-            <Link to="/OneProfProjects">
-            <button onClick={handleOneProf} className='Prof-projects'>
-              Projects
-            </button>
-          </Link>
             </div>
         </div>
     );
@@ -68,7 +53,6 @@ function Prof(props) {
   
       fetchData();
     }, []);
-    
 
   return (
     <div id='faculty-page'  className='faculty-page'>
@@ -86,7 +70,6 @@ function Prof(props) {
               address={item.address}
               email={item.email}
               research={item.research}
-              onClick={props.onClick}
             />
           )
         })
