@@ -36,10 +36,11 @@ import ProfProfile from "./pages/ProfProfile";
 import HomeFaculty from "./pages/HomeFaculty";
 import ForgotPassword from "./components/authentication/ForgotPassword";
 import OneProfProjects from "./components/Student/OneProfProjects";
+import ResetPassword from "./components/authentication/ResetPassword";
 
 
 function App() {
-  const Api_URL = "https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app"
+  const Api = "https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app"
   // var isWho = "user";
   const [kon, setKon] = useState("user");
   const [isAuthorized, setAuthorization] = useState(false);
@@ -48,8 +49,17 @@ function App() {
     // const [loginDetail, setLoginDetail] = useState("");
     const [studentReq, setStudentReq] = useState("");
     const [profId, setProfId] = useState("");
+    const [resetToken, setResetToken] = useState("");
+    const [facultyIdForProject, setFacultyIdForProject] = useState("");
     const my =[];
 
+   function getFacultyIdForProject(z){
+    setFacultyIdForProject(z);
+   }
+
+    function getToken(y){
+      setResetToken(y);
+    }
     function handleProfId(x){
      setProfId(x);
      console.log(x);
@@ -127,12 +137,18 @@ function App() {
               <Route path="/" element={<NavBar who={kon} />}>
                 {/* <Route path="DataTable" element={<DataTable />} /> */}
                 <Route path="Faculty" element={<Faculty />}>
-                  <Route path="Cse" element={<Cse />} />
-                  <Route path="Ee" element={<Ee />} />
-                  <Route path="Ce" element={<Ce />} />
+                  <Route path="Cse" element={<Cse getFacultyIdForProject={getFacultyIdForProject} />} />
+                  <Route path="Ee" element={<Ee getFacultyIdForProject={getFacultyIdForProject} />} />
+                  <Route path="Ce" element={<Ce getFacultyIdForProject={getFacultyIdForProject} />} />
+                  <Route path="Ae" element={<Ae getFacultyIdForProject={getFacultyIdForProject} />} />
+                  <Route path="Che" element={<Che getFacultyIdForProject={getFacultyIdForProject} />} />
+                  <Route path="Me" element={<Me getFacultyIdForProject={getFacultyIdForProject} />} />
+                  <Route path="Mse" element={<Mse getFacultyIdForProject={getFacultyIdForProject} />} />
+                  <Route path="Dms" element={<Dms getFacultyIdForProject={getFacultyIdForProject} />} />
+                  <Route path="Phy" element={<Phy getFacultyIdForProject={getFacultyIdForProject} />} />
                 </Route>
                 <Route path="ContactUs" element={<ContactUs />} />
-                <Route path="OneProfProjects" element={<OneProfProjects />} />
+                <Route path="OneProfProjects" element={<OneProfProjects facultyIdForProject={facultyIdForProject} />} />
                 <Route index element={<Home />} />
                 <Route path="Home" element={<Home />} />
                 <Route path="LogOut" element={<LogOut onLogout={handleLogout} />} />
@@ -166,7 +182,7 @@ function App() {
              handleProfId ={handleProfId}
              />} />
             <Route path="SignUp" element={<SignUp />} />
-            <Route path={`${Api_URL}/api/user/ResetPassword/${resetToken}`} element={<ResetPassword />} />
+            <Route path={`/ResetPassword/${resetToken}`} element={<ResetPassword resetToken={resetToken} />} />
             <Route path="SignIn" element={<SignIn
              sendDataToParent={getData}
              handleProfId ={handleProfId}
@@ -174,7 +190,6 @@ function App() {
             <Route path="ForgotPassword" element={<ForgotPassword 
             getToken ={getToken}
             />} />
-
 
           </Routes>
         </BrowserRouter>

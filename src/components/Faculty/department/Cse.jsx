@@ -3,11 +3,11 @@ import axios from 'axios';
 import Prof from '../Prof'
 import '../prof.css'
 
-function Cse() {
+function Cse(props) {
   return (
     <div className='faculty-main-api'>
       <h2>This is Computer science faculty page</h2>
-      <Prof departmentName = "Computer Science And Engineering" />
+      <Prof getFacultyIdForProject={props.getFacultyIdForProject} departmentName = "Computer Science And Engineering" />
     </div>
   )
 

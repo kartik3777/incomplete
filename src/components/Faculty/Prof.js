@@ -2,12 +2,20 @@ import{ React, useState, useEffect }from 'react'
 import axios from 'axios';
 import './prof.css'
 import Loader from './Loader'
-// import '../../pages/Navbar.css'
-import  CseProfData from './main';
+import { useNavigate } from 'react-router-dom'; 
 
 function ProfCard(props){
+  const navigate = useNavigate();
+  function showProjectsOfOneProject(){
+    const uniqueId = props.email.split("@")[0];
+    props.getFacultyIdForProject(uniqueId);
+    navigate("/OneProfProjects");
+ 
+
+  }
+     
     return(
-        <div className='prof-card'>
+        <div onClick={showProjectsOfOneProject} className='prof-card'>
             <div className='box-1'>
                 <div className="prof-dp">
                     <div className='circle'>
@@ -70,6 +78,7 @@ function Prof(props) {
               address={item.address}
               email={item.email}
               research={item.research}
+              getFacultyIdForProject={props.getFacultyIdForProject}
             />
           )
         })

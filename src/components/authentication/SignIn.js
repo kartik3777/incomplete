@@ -12,15 +12,7 @@ function SignIn(props) {
   const [iskon, setIsKon] = useState("user");
   const [roll, setRoll] = useState("");
   const [otpFromApi, setOtpFromApi] = useState();
-<<<<<<< HEAD
   const [loading, setLoading] = useState(false);
-=======
- 
-
-  // const togglePasswordVisibility = () => {
-  //   setShowPassword(!showPassword);
-  // };
->>>>>>> 8f3936c6d8a94aea43e40381acebf1c4f87748f4
 
   function handleFaculty() {
     setIsKon("faculty");
@@ -159,18 +151,7 @@ function SignIn(props) {
           </div>
           <div className="login-heading">Login</div>
           <div className="cont2">
-            <div className="input-field">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                spellCheck="false"
-              />
-              <label>Enter email</label>
-            </div>
-            <div className="login-heading">Login</div>
-            <div className="cont2">
+   
               <div className="input-field">
                 <input
                   type="email"
@@ -191,25 +172,9 @@ function SignIn(props) {
                 />
                 <label id="password-label">Password</label>
               </div>
-            </div>
-            {error && <div className="error">{error}</div>}
 
-            <div className="choose">
-              <button className="btns" type="submit" onClick={handleSubmit}>
-                Login
-              </button>
-            </div>
-            <div className="btm">
-              <Link className="a" to="/SignUp">
-                New Student? SignUp
-              </Link>
-              <Link className="a1" to="/ForgotPassword">
-                ForgotPassword?
-              </Link>
-            </div>
-          </div>
-          {error && <div className="error">{error}</div>}
-  
+            {error && <div className="error">{error}</div>}
+          
           <div className="choose">
             <button className="btns" type="submit" onClick={handleSubmit}>
               Login
@@ -224,6 +189,7 @@ function SignIn(props) {
             </Link>
           </div>
         </div>
+      </div>
       </div>
     );
   } else {

@@ -1,8 +1,5 @@
 import React from 'react'
-// import Prof from './Prof'
-// import Menu from './Menu'
 import { Outlet, Link, useNavigate } from "react-router-dom";
-// import Cse from './Cse'
 import './prof.css'
 
 function Menu() {

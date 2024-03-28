@@ -20,6 +20,7 @@ body{
     margin: 10px;
     border-radius: 10px;
     overflow: hidden;
+    cursor: pointer;
 }
 .box-2 span{
     color: rgb(162, 112, 37);
@@ -42,7 +43,6 @@ body{
     transition: 0.3s;
     padding: auto;
     background-color: transparent;
-    /* background: linear-gradient(to top, rgb(11, 73, 90), rgb(71, 132, 143)); */
     justify-content: center;
     padding-top: 20px;
 }

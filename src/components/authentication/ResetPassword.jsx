@@ -1,11 +1,10 @@
 import React,{ useState, useEffect, Component }from "react";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
 
-function ResetPassword(){
+function ResetPassword(props){
     
-    const { id } = useParams(); 
+
     const [showPassword, setShowPassword] = useState(false);
     const [data, setData] =useState({
         password: "",
@@ -28,20 +27,24 @@ function ResetPassword(){
     }
     const handleSubmit =async (event)=>{
         event.preventDefault();
-
+    
         try {
-            const response = await axios.post(`https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/resetPassword/${id}`, {
+          const resetToken = props.resetToken;
+            const response = await axios.post(`https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/resetPassword/`, {
                 password: data.password,
                 confirmpassword: data.confirmpassword,
-                token:this.props.match.params.id
+                token: resetToken
             });
             console.log(response.data);
             alert("Password reset successful!");
-        } catch (error) {
+        } 
+        catch (error) {
             console.error('Error resetting password:', error);
             alert("Failed to reset password, please try again.");
         }
     }
+
+
     return(
     <div className='login-position'>
     <div className='login-box-2'>

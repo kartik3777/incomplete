@@ -2,11 +2,11 @@ import React from 'react'
 import Prof from '../Prof'
 import '../prof.css'
 
-function Phy() {
+function Phy(props) {
   return (
     <div className='faculty-main-api'>
     <h2>Physics Department faculty page</h2>
-    <Prof departmentName = "Physics Department" />
+    <Prof getFacultyIdForProject={props.getFacultyIdForProject} departmentName = "Physics Department" />
   </div>
   )
 }
