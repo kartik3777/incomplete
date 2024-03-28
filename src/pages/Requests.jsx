@@ -18,6 +18,7 @@ const FacultyCard = (props) => {
             <p className='info'>Cpi: {props.cpi}</p>
             <p className='info'>Roll Number: {props.rollno}</p>
             <p className='info'>Email: {props.email}</p>
+            <p className='info'>Resume link: <a href={props.resumeLink}>{props.resumeLink}</a> </p>
             <button className="accept-button">ACCEPT</button>
             <button className="reject-button">REJECT</button>
           </div>
@@ -50,6 +51,8 @@ const Requests = (props) => {
           throw new Error('Failed to fetch student data');
         }
         const data = await response.json();
+        console.log("this is request data");
+        console.log(data);
         // Create a new object with relevant properties from data.user
         const studentData = {
           name: data.user.name,
@@ -57,6 +60,7 @@ const Requests = (props) => {
           cpi: data.user.cpi,
           rollno: data.user.rollno,
           _id: data.user._id,
+          resumeLink: data.user.resumeLink
         };
         // Update the array by adding the new studentData
         setStudentDataArray((prevArray) => [...prevArray, studentData]);
@@ -162,6 +166,7 @@ const Requests = (props) => {
               cpi = {item.cpi}
              rollno ={item.rollno}
              id={item._id} 
+             resumeLink ={item.resumeLink}
               />
             )
           })

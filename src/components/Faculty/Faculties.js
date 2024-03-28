@@ -35,12 +35,12 @@ function Menu() {
           <li onClick={() => {showDepartment("Computer Science And Engineering")}} className="dabba dabba1"><Link onClick={CloseNav}  id='cse'  to="/Faculty/Cse">Computer Science And Engineering</Link></li>
           <li className="dabba dabba2"><Link onClick={CloseNav} id='ee' to="/Faculty/Ee">Electrical</Link></li>
           <li onClick={() => {showDepartment("Civil Engineering")}} className=" dabba dabba3"><Link onClick={CloseNav} id='ce' to="/Faculty/Ce">Civil Engineering</Link></li>
-          <li className="dabba dabba1"><Link onClick={CloseNav} id='cse'  to="/Faculty/Cse">Computer scince</Link></li>
-          <li className="dabba dabba2"><Link onClick={CloseNav} id='ee' to="/Faculty/Ee">Electrical</Link></li>
-          <li className=" dabba dabba3"><Link onClick={CloseNav} id='ce' to="/Faculty/Ce">Civil Engineering</Link></li>
-          <li className="dabba dabba1"><Link onClick={CloseNav} id='cse'  to="/Faculty/Cse">Computer scince</Link></li>
-          <li className="dabba dabba2"><Link onClick={CloseNav} id='ee' to="/Faculty/Ee">Electrical</Link></li>
-          <li className=" dabba dabba3"><Link onClick={CloseNav} id='ce' to="/Faculty/Ce">Civil</Link></li>
+          <li className="dabba dabba1"><Link onClick={CloseNav} id='che'  to="/Faculty/Che">Chemical Engineering</Link></li>
+          <li className="dabba dabba2"><Link onClick={CloseNav} id='dms' to="/Faculty/Dms">Department of Management Sciences</Link></li>
+          <li className=" dabba dabba3"><Link onClick={CloseNav} id='ae' to="/Faculty/Ae">Aerospace Engineering</Link></li>
+          <li className="dabba dabba1"><Link onClick={CloseNav} id='me'  to="/Faculty/Me">Mechanical Engineering</Link></li>
+          <li className="dabba dabba2"><Link onClick={CloseNav} id='mse' to="/Faculty/Mse">Material Science and Engineering</Link></li>
+          <li className=" dabba dabba3"><Link onClick={CloseNav} id='phy' to="/Faculty/Phy">Physics</Link></li>
           </ul>
 
           </div>

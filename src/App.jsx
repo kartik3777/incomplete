@@ -11,6 +11,13 @@ import Project_list_prof from "./pages/Project_list_prof";
 import Cse from "./components/Faculty/department/Cse";
 import Ce from "./components/Faculty/department/Ce";
 import Ee from "./components/Faculty/department/Ee";
+import Ae from "./components/Faculty/department/Ae";
+import Che from "./components/Faculty/department/Che";
+import Dms from "./components/Faculty/department/Dms";
+import Me from "./components/Faculty/department/Me";
+import Mse from "./components/Faculty/department/Mse";
+import Phy from "./components/Faculty/department/Phy";
+
 // import Prof from "./components/Faculty/Prof";
 import SignUp from "./components/authentication/SignUp";
 // import About from "./pages/About";
@@ -29,9 +36,11 @@ import ProfProfile from "./pages/ProfProfile";
 import HomeFaculty from "./pages/HomeFaculty";
 import ForgotPassword from "./components/authentication/ForgotPassword";
 import OneProfProjects from "./components/Student/OneProfProjects";
+import ResetPassword from "./components/authentication/Reset.Password";
 
 
 function App() {
+  const Api_URL = "https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app"
   // var isWho = "user";
   const [kon, setKon] = useState("user");
   const [isAuthorized, setAuthorization] = useState(false);
@@ -40,7 +49,12 @@ function App() {
     // const [loginDetail, setLoginDetail] = useState("");
     const [studentReq, setStudentReq] = useState("");
     const [profId, setProfId] = useState("");
+    const [resetToken, setResetToken] = useState("");
     const my =[];
+
+    function getToken(y){
+      setResetToken(y);
+    }
 
     function handleProfId(x){
      setProfId(x);
@@ -93,6 +107,8 @@ function App() {
                 <Route path="ProfProfile" element={<ProfProfile profId={profId} />} />
                 <Route index element={<HomeFaculty />} />
                 <Route path="Home" element={<HomeFaculty />} />
+              
+
                 <Route path="EnrolledStudents" element={<EnrolledStudents />} />
                 <Route path="ContactUs" element={<ContactUs />} />
                 {/* <Route path="LogOut" element={<LogOut />} /> */}
@@ -120,6 +136,12 @@ function App() {
                   <Route path="Cse" element={<Cse />} />
                   <Route path="Ee" element={<Ee />} />
                   <Route path="Ce" element={<Ce />} />
+                  <Route path="Ae" element={<Ae />} />
+                  <Route path="Che" element={<Che />} />
+                  <Route path="Dms" element={<Dms />} />
+                  <Route path="Me" element={<Me />} />
+                  <Route path="Mse" element={<Mse />} />
+                  <Route path="Phy" element={<Phy />} />
                 </Route>
                 <Route path="ContactUs" element={<ContactUs />} />
                 <Route path="OneProfProjects" element={<OneProfProjects />} />
@@ -156,11 +178,14 @@ function App() {
              handleProfId ={handleProfId}
              />} />
             <Route path="SignUp" element={<SignUp />} />
+            <Route path={`${Api_URL}/api/user/ResetPassword/${resetToken}`} element={<ResetPassword />} />
             <Route path="SignIn" element={<SignIn
              sendDataToParent={getData}
              handleProfId ={handleProfId}
              />} />
-            <Route path="ForgotPassword" element={<ForgotPassword />} />
+            <Route path="ForgotPassword" element={<ForgotPassword 
+            getToken ={getToken}
+            />} />
 
 
           </Routes>
