@@ -58,7 +58,7 @@ const Contacts = [
         name: "Jaswanth",
         phone: 7013451713,
         image:"images/jaswanth.jpg",
-        email: "sjaswanth22@iitk.ac.in",
+        email: "sanapala.jaswanth1@gmail.com",
         linkedInLink: "http://www.linkedin.com/in/jaswanth-sanapala-0b8b69257",
         instagramLink: "https://www.instagram.com/mr.jaswanth_11?igsh=MTNjYWpqMWMxNTBzbQ=="
     },

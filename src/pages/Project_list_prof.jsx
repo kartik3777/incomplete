@@ -106,8 +106,8 @@ function Project_list_prof(props) {
       }
       const data = await response.json();
       setFacultyData(data);
-      // console.log("data in prof project list");
-      // console.log(data);
+      console.log("data in prof project list");
+      console.log(data);
       setLoading(false);
     } catch (error) {
       console.error('Error fetching faculty data:', error);

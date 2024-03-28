@@ -113,6 +113,7 @@ function SignIn(props) {
       });
   }
 
+
   const fetchData = async () => {
     try {
       const uniqueId = email.split("@")[0];
@@ -120,7 +121,7 @@ function SignIn(props) {
       const response = await axios.post(url, {
         email: email,
       });
-
+      console.log("when faculty login....");
       console.log(response);
       props.handleProfId(uniqueId);
       // alert("yes, you are there")

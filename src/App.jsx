@@ -51,18 +51,21 @@ function App() {
     const [profId, setProfId] = useState("");
     const [resetToken, setResetToken] = useState("");
     const [facultyIdForProject, setFacultyIdForProject] = useState("");
+    const [projectId, setProjectId] = useState("");
     const my =[];
 
+    function getProjectId(x){
+      setProjectId(x);
+    }
    function getFacultyIdForProject(z){
     setFacultyIdForProject(z);
    }
-
     function getToken(y){
       setResetToken(y);
     }
     function handleProfId(x){
      setProfId(x);
-     console.log(x);
+    //  console.log(x);
      console.log("profid in appjsx is: "+profId);
     }
 
@@ -102,12 +105,15 @@ function App() {
             <Routes>
               <Route path="/" element={<NavBar who={kon} />}>
                 <Route path="Project_list_prof" element={<Project_list_prof
+                getProjectId ={getProjectId}
                 profId ={profId}
                  req ={handleReq} 
                  />} />
                 {/* <Route path="DataTable" element={<DataTable />} /> */}
                 <Route path="NewProject" element={<NewProject profId={profId} />} />
-                <Route path="Requests" element={<Requests my={my}/>} />
+                <Route path="Requests" element={<Requests
+                projectId ={projectId}
+                 my={my}/>} />
                 <Route path="ProfProfile" element={<ProfProfile profId={profId} />} />
                 <Route index element={<HomeFaculty />} />
                 <Route path="Home" element={<HomeFaculty />} />
