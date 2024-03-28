@@ -30,20 +30,12 @@ function SignIn(props) {
     setPassword("");
   }
 
-  // window.addEventListener("keypress", function(event) {
-  //   if (event.key === "Enter") {
-  //     // alert("enter keyb working");
-  //     // event.preventDefault();
-  //     handleSubmit(event);
-  //   }
-  // });
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!email || !password) {
       setError("Email and password are required!");
-      return; // Exit early if validation fails
+      return; 
     }
 
     const url =
@@ -64,14 +56,11 @@ function SignIn(props) {
       setRoll(resp.data.user.rollno);
 
       if (resp.status === "success") {
-        // Clear input fields after successful authentication
+        
         setEmail("");
         setPassword("");
         setError("");
-        // console.log("API call successful"); // Log success message
         setAuthorized(true);
-        // console.log(isAuth);
-        // props.sendDataToParent(isAuth);
       } else {
         console.log("Authentication failed"); // Log failure message
         setError("Incorrect username or password!");
@@ -89,6 +78,7 @@ function SignIn(props) {
 
   props.sendDataToParent(isAuth, iskon, ikartik);
 
+  
   function handleOTP() {
     if (!email) {
       alert("Please provide an email address.");

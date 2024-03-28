@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import './about.css';
 
 function NewProject(props) {
@@ -17,6 +17,8 @@ function NewProject(props) {
     maxstudents: ''
   });
 
+  const [showCustomCategory, setShowCustomCategory] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -25,17 +27,23 @@ function NewProject(props) {
     });
   };
 
-
+  const handleCategoryChange = (e) => {
+    const { value } = e.target;
+    setFormData({
+      ...formData,
+      projectCategory: value
+    });
+    setShowCustomCategory(value === "Other");
+  };
 
   const handleSubmit = async (e) => {
-
+    if(!formData.name || !formData.description || !formData.cpirequired || !formData.prereg || !formData.openfor || !formData.projectCategory || !formData.resumerequired)
     e.preventDefault();
     try {
-      const uniqueID = props.profId;
-      console.log("uniqueId reached to newPorject is: "+ uniqueID);
+      const uniqueID =props.profID; 
+      console.log("uniqueID reached to newProject is: "+ uniqueID);
       const url = `https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/professor/${uniqueID}/createproject`;
-
-     
+  
       const response = await axios.post(url, formData);
   
       if (response.status === 201) {
@@ -96,13 +104,30 @@ function NewProject(props) {
             onChange={handleChange}
           />
           <label id='kartik' className='project-form-label' htmlFor="category">Category: </label>
-          <input
-            type="text"
+          <select
             id="category"
             name="projectCategory"
-            placeholder="e.g. Machine Learning"
-            onChange={handleChange}
-          />
+            value={formData.projectCategory}
+            onChange={handleCategoryChange}
+          >
+            <option value="">Select category...</option>
+            <option value="AI">Artificial Intelligence</option>
+            <option value="ML">Machine Learning</option>
+            <option value="WebDev">Web Development</option>
+            <option value="Quantum">Quantum Computing</option>
+            <option value="Signal">Signal Processing</option>
+            <option value="Other">Other</option>
+          </select>
+          {showCustomCategory && (
+            <input
+              type="text"
+              id="other-category"
+              name="projectCategory"
+              placeholder="Enter custom category"
+              onChange={handleChange}
+            />
+          )}
+
           <label id='kartik' className='project-form-label' htmlFor="resume">Resume:</label>
           <select
             id="resume"
@@ -122,12 +147,12 @@ function NewProject(props) {
           />
 
           <div className="project-buttons">
-          <Link id='cancel-kar'  to="/Project_list_prof">
-            <button className="button" id="cancel-button">
+          <Link id='cancel-kar' to="/Project_list_prof">
+          <button className="button" id="cancel-button">
             Cancel
           </button>
           </Link>
-          
+
            <input type="submit" className="submit-button" value="Save" />
            </div>
           
