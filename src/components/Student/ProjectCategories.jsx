@@ -4,13 +4,12 @@ import "./projectcard.css";
 import ProjectDetails from "./projectdetails";
 import "./ProjectDesc.jsx";
 import { Link } from "react-router-dom";
-import Loader from '../Faculty/Loader';
 
 function TotalProjects(props) {
   // console.log(props.rollno);
   const user = {
   };
-  const [loading, setLoading] = useState(false);
+
   function expand() {
     const projectDiv = document.getElementById(`project-${props.index}`);
     const button = document.getElementById(`expand-button-${props.index}`);
@@ -24,13 +23,15 @@ function TotalProjects(props) {
     }
   }
 
+
+
+
   const handleSubmit = async (e) => {
 
     if(props.total>=5){
       alert("You have exceeded Projects Request Limit");
       return;
     }
-    setLoading(true);
     e.preventDefault();
     const btnData = document.getElementById("request-vala-button").innerText;
     if(btnData === "Request"){
@@ -64,10 +65,6 @@ function TotalProjects(props) {
   return (
 
     <div id={`project-${props.index}`} className="each-project">
-     {loading ? (
-        <Loader />
-      ):(
-      <div>
       <h2>{props.name}</h2>
       <p>{props.details}</p>
       <div className="normal-details">
@@ -127,8 +124,6 @@ function TotalProjects(props) {
         </div>
 
       </div>
-      </div>
-      )}
 
       <div  className="request-button-css"><button id="request-vala-button" onClick={handleSubmit}>Request</button></div>
 
@@ -139,7 +134,6 @@ function TotalProjects(props) {
 function ProjectCategory(props) {
 
   const [facultyData, setFacultyData] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -148,11 +142,9 @@ function ProjectCategory(props) {
           `https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/faculty/projects/?projectCategory=${props.CategoryName}`
         );
         console.log(response.data);
-        setFacultyData(response.data);
-        setLoading(false); // Assuming the response contains an array of faculty data
+        setFacultyData(response.data); // Assuming the response contains an array of faculty data
       } catch (error) {
         console.error("Error fetching faculty data:", error);
-        setLoading(false);
       }
     };
 
@@ -160,9 +152,6 @@ function ProjectCategory(props) {
   }, []);
   // console.log("faculty data is",facultyData);
 
-  if(loading){
-    return <Loader /> ;
-  }
 
 
   return (
