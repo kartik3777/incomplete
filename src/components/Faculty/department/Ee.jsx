@@ -2,11 +2,12 @@ import React from 'react'
 import Prof from '../Prof'
 import '../prof.css'
 
-function Ee() {
+function Ee(props) {
   return (
     <div>
-      <h2>Electrical Engineering faculty page </h2>
-      <Prof departmentName = "Electrical Engineering" />
+      <h2>This is Electrical faculty page </h2>
+      <Prof 
+      onClick={props.onClick} departmentName = "Electrical Engineering" />
     </div>
   )
 }
