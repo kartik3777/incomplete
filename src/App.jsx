@@ -36,7 +36,6 @@ import ProfProfile from "./pages/ProfProfile";
 import HomeFaculty from "./pages/HomeFaculty";
 import ForgotPassword from "./components/authentication/ForgotPassword";
 import OneProfProjects from "./components/Student/OneProfProjects";
-import  ResetPassword from "./components/authentication/ResetPassword";
 
 
 function App() {
@@ -49,13 +48,8 @@ function App() {
     // const [loginDetail, setLoginDetail] = useState("");
     const [studentReq, setStudentReq] = useState("");
     const [profId, setProfId] = useState("");
-    const [facultyId,setFacultyId]=useState("");
     const my =[];
 
-    function onClick(id){
-          setFacultyId(id);
-          console.log('clicked');
-    }
     function handleProfId(x){
      setProfId(x);
      console.log(x);
@@ -133,12 +127,12 @@ function App() {
               <Route path="/" element={<NavBar who={kon} />}>
                 {/* <Route path="DataTable" element={<DataTable />} /> */}
                 <Route path="Faculty" element={<Faculty />}>
-                  <Route path="Cse" element={<Cse onClick ={onClick} />} />
-                  <Route path="Ee" element={<Ee onClick ={onClick} />} />
-                  <Route path="Ce" element={<Ce onClick ={onClick} />} />
+                  <Route path="Cse" element={<Cse />} />
+                  <Route path="Ee" element={<Ee />} />
+                  <Route path="Ce" element={<Ce />} />
                 </Route>
                 <Route path="ContactUs" element={<ContactUs />} />
-                <Route path="OneProfProjects" element={<OneProfProjects facultyId={facultyId} />} />
+                <Route path="OneProfProjects" element={<OneProfProjects />} />
                 <Route index element={<Home />} />
                 <Route path="Home" element={<Home />} />
                 <Route path="LogOut" element={<LogOut onLogout={handleLogout} />} />
