@@ -45,6 +45,7 @@ function TotalProjects(props) {
         // console.log(response.status);
   
         if (response.status === 201) {
+          console.log("requesting a project!!");
           console.log(response);
           document.getElementById("request-vala-button").innerText =  "Requested!!";
         } else {

@@ -30,6 +30,14 @@ function SignIn(props) {
     setPassword("");
   }
 
+  // window.addEventListener("keypress", function(event) {
+  //   if (event.key === "Enter") {
+  //     // alert("enter keyb working");
+  //     // event.preventDefault();
+  //     handleSubmit(event);
+  //   }
+  // });
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -51,7 +59,8 @@ function SignIn(props) {
 
       const resp = await response.json();
       setIkartik(resp.data.user);
-      // console.log(ikartik);
+      console.log("data of student logging in!!!!!!!!!!");
+      console.log(resp.data.user);
       setRoll(resp.data.user.rollno);
 
       if (resp.status === "success") {
@@ -138,9 +147,29 @@ function SignIn(props) {
     if (otpFromApi == password) {
       fetchData();
     } else {
+      alert("otp does not matched")
       setAuthorized(false);
     }
   }
+
+  function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+      
+      handleSubmit(event);
+    }
+  }
+  function handleKeyPress2(event) {
+    if (event.key === 'Enter') {
+      
+      handleOTP();
+    }
+  }
+  function handleKeyPress3(event) {
+    if (event.key === 'Enter') {
+      handleFacultyOtp();
+    }
+  }
+  
 
   if (iskon === "user") {
     return (
@@ -158,6 +187,7 @@ function SignIn(props) {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  onKeyPress={handleKeyPress}
                   required
                   spellCheck="false"
                 />
@@ -168,6 +198,7 @@ function SignIn(props) {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  onKeyPress={handleKeyPress}
                   required
                   spellCheck="false"
                 />
@@ -177,7 +208,7 @@ function SignIn(props) {
             {error && <div className="error">{error}</div>}
           
           <div className="choose">
-            <button className="btns" type="submit" onClick={handleSubmit}>
+            <button id="userLoginButton" className="btns" type="submit" onClick={handleSubmit}>
               Login
             </button>
           </div>
@@ -212,6 +243,7 @@ function SignIn(props) {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                onKeyPress={handleKeyPress2}
                 required
                 spellCheck="false"
               />
@@ -226,6 +258,7 @@ function SignIn(props) {
                 type="text"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                onKeyPress={handleKeyPress3}
                 required
                 spellCheck="false"
               />

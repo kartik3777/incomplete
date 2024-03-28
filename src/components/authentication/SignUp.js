@@ -49,14 +49,7 @@ function SignUp(){
        confirmpassword: "",
        
    })
-//    const [name, setName] = useState("");
-//    const [roll, setRoll] = useState("");
-//    const [email, setEmail] = useState("");
-//    const [department, setDepartment] = useState("");
-//    const [cpi, setCpi] = useState("");
-//    const [resumeLink, setResumeLink] = useState("");
-//    const [password, setPassword] = useState("");
-//    const [confirmpassword, setConfirmpassword] = useState("");
+
    const [OTP, setOTP] = useState("");
    const [OTPData, setOTPData] = useState(null);
 
@@ -95,14 +88,6 @@ function SignUp(){
         return;
     }
 
-    // setName(data.name);
-    // setRoll(data.rollno);
-    // setEmail(data.email);
-    // setDepartment(data.department);
-    // setCpi(data.cpi);
-    // setResumeLink(data.resumeLink);
-    // setPassword(data.password);
-    // setConfirmpassword(data.confirmpassword);
     setOTP(data.OTP);
     
     if (!OTPData || !OTPData.otp) {
@@ -153,6 +138,17 @@ function SignUp(){
     )
    }
 
+   function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+        handleClick();
+    }
+  }
+   function handleKeyPress2(event) {
+    if (event.key === 'Enter') {
+        handleOTP();
+    }
+  }
+
     return(
         <>
         <div className='login-position'>
@@ -160,41 +156,41 @@ function SignUp(){
             <div className='login-heading'>REGISTER</div>
               <div className='cont2'>
                  <div className='input-field' >
-                    <input onChange={handleChange} value={data.name} name='name' type="text" required="required" />
+                    <input   onKeyPress={handleKeyPress} onChange={handleChange} value={data.name} name='name' type="text" required="required" />
                     <label>Student Name</label>
                  </div>
                  <div className='input-field'>
-                    <input  onChange={handleChange} value={data.rollno} name='rollno' type="number" required="required" /> 
+                    <input    onKeyPress={handleKeyPress} onChange={handleChange} value={data.rollno} name='rollno' type="number" required="required" /> 
                     <label>Roll No</label>
                  </div>
                  <div className='input-field'>
-                    <input  onChange={handleChange} value={data.email} name='email' type="email" required="required" /> 
+                    <input  onKeyPress={handleKeyPress2} onChange={handleChange} value={data.email} name='email' type="email" required="required" /> 
                     <label>Enter Your IITK Mail-Id</label>
                  </div>
                  <button onClick={handleOTP} className='otpButton'>Send OTP</button>
                  <div className='input-field'>
-                    <input  onChange={handleChange} value={OTP} name='OTP' type="text" required="required" /> 
+                    <input  onKeyPress={handleKeyPress} onChange={handleChange} value={OTP} name='OTP' type="text" required="required" /> 
                     <label>Enter OTP</label>
                  </div>
                  <div className='input-field'>
-                    <input  onChange={handleChange} value={data.department} name='department' type="text"required="required"/> 
+                    <input  onKeyPress={handleKeyPress} onChange={handleChange} value={data.department} name='department' type="text"required="required"/> 
                     <label>Department</label>
                  </div>
                  <div className='input-field'>
-                    <input  onChange={handleChange} value={data.cpi} name='cpi' type="text"required="required"/> 
+                    <input  onKeyPress={handleKeyPress} onChange={handleChange} value={data.cpi} name='cpi' type="text"required="required"/> 
                     <label>Cpi</label>
                  </div>
                  <div className='input-field'>
-                      <input  onChange={handleChange} value={data.resumeLink} name='resumeLink' type="text" required="required"/> 
+                      <input  onKeyPress={handleKeyPress} onChange={handleChange} value={data.resumeLink} name='resumeLink' type="text" required="required"/> 
                       <label>Resume drive link</label>
                  </div>
              
                    <div className='input-field'>
-                       <input  onChange={handleChange} value={data.password} name='password' type="password" required="required" /> 
+                       <input  onKeyPress={handleKeyPress} onChange={handleChange} value={data.password} name='password' type="password" required="required" /> 
                        <label>Create-Password</label>
                    </div>
                    <div className='input-field'>
-                        <input onChange={handleChange} value={data.confirmpassword} name='confirmpassword' type="password" required="required" /> 
+                        <input  onKeyPress={handleKeyPress} onChange={handleChange} value={data.confirmpassword} name='confirmpassword' type="password" required="required" /> 
                         <label>Confirm-Password</label>
                    </div>
                 </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,createContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ContactUs from "./pages/ContactUs";
 import NavBar from "./pages/NavBar";
@@ -40,6 +40,7 @@ import ResetPassword from "./components/authentication/ResetPassword";
 
 
 function App() {
+ 
   const Api = "https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app"
   // var isWho = "user";
   const [kon, setKon] = useState("user");
@@ -62,6 +63,7 @@ function App() {
    }
     function getToken(y){
       setResetToken(y);
+      console.log("token is: " + y);
     }
     function handleProfId(x){
      setProfId(x);
@@ -127,6 +129,7 @@ function App() {
                  logedInStudentData= {logedInStudentData} 
                  />} />
                 <Route path="LogOut" element={<LogOut onLogout={handleLogout} />} />
+                <Route path={`/resetpassword/${resetToken}`} element={<ResetPassword resetToken={resetToken} />} />
                 {/* <Route path="UserProfile" element={<UserProfile loginDetail= {loginDetail} />} /> */}
               </Route>
             </Routes>
@@ -167,6 +170,7 @@ function App() {
                 <Route path="ProjectDesc" element={<ProjectDesc />} />
                 <Route path="UserProfile" element={<UserProfile logedInStudentData= {logedInStudentData} />} />
                 <Route path="History" element={<History />} />
+                <Route path={`/resetpassword/${resetToken}`} element={<ResetPassword resetToken={resetToken} />} />
               </Route>
             </Routes>
           </BrowserRouter>
@@ -179,6 +183,7 @@ function App() {
   }
 
   else {
+    console.log("reset Token is: "+ resetToken);
     return (
       <>
         <BrowserRouter>
@@ -188,7 +193,8 @@ function App() {
              handleProfId ={handleProfId}
              />} />
             <Route path="SignUp" element={<SignUp />} />
-            <Route path={`/ResetPassword/${resetToken}`} element={<ResetPassword resetToken={resetToken} />} />
+            
+            <Route  path={`/resetpassword/:resetToken`} element={<ResetPassword resetToken={resetToken} />} />
             <Route path="SignIn" element={<SignIn
              sendDataToParent={getData}
              handleProfId ={handleProfId}

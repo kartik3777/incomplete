@@ -24,6 +24,7 @@ function ForgotPassword(props) {
     event.preventDefault();
     if(!data.email){
         alert("Please enter email id to proceed")
+        return;
     }
 
     fetch(
@@ -50,7 +51,9 @@ function ForgotPassword(props) {
          //\\
         //  \\
         // here change the data.token name according to data coming from api
-        props.getToken(data.token);
+
+        console.log("token from api is: "+ data.resetToken );
+        props.getToken(data.resetToken);
         //  props.getToken("cc6fbbf18567274b8f27f37652fc90893efeea8733fa21cbec02c026ec01b1e5");
       })
       .catch((error) => {
@@ -58,6 +61,12 @@ function ForgotPassword(props) {
         alert("Failed to send please try again.");
       });
   };
+
+  function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+      handleSubmit(event);
+    }
+  }
 
   return (
     <div className="login-position">
@@ -68,6 +77,7 @@ function ForgotPassword(props) {
             <input
               onChange={handleChange}
               value={data.email}
+              onKeyPress={handleKeyPress}
               name="email"
               type="email"
               required="required"
