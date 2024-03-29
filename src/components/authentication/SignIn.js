@@ -67,9 +67,7 @@ function SignIn(props) {
       }
     } catch (error) {
       console.error("An error occurred:", error); // Log the error
-      setError(
-        "An error occurred while processing your request. Please try again later."
-      );
+      setError("Incorrect username or password!");
     } finally{
       setLoading(false);
     }
@@ -134,7 +132,7 @@ function SignIn(props) {
       // setLoading(false);
     } catch (error) {
       console.error("Error fetching faculty data:", error);
-      alert("incorrect credentials");
+      alert("Not registered, contact developer's team to register");
       // setLoading(false);
     }finally{
       setLoading(false);
