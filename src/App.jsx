@@ -98,7 +98,7 @@ function App() {
     setCategoryName(x);
   }
 
-  if (true) {
+  if (isAuthorized) {
     if (kon === "faculty") {
 
       return (
