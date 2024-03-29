@@ -13,6 +13,7 @@ function SignIn(props) {
   const [roll, setRoll] = useState("");
   const [otpFromApi, setOtpFromApi] = useState();
   const [loading, setLoading] = useState(false);
+  const [loadingOTP, setLoadingOTP] = useState(false);
 
   function handleFaculty() {
     setIsKon("faculty");
@@ -30,22 +31,13 @@ function SignIn(props) {
     setPassword("");
   }
 
-  // window.addEventListener("keypress", function(event) {
-  //   if (event.key === "Enter") {
-  //     // alert("enter keyb working");
-  //     // event.preventDefault();
-  //     handleSubmit(event);
-  //   }
-  // });
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     if (!email || !password) {
       setError("Email and password are required!");
-      return; // Exit early if validation fails
+      return; 
     }
-
+    setLoading(true);
     const url =
       "https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/login";
     try {
@@ -64,11 +56,10 @@ function SignIn(props) {
       setRoll(resp.data.user.rollno);
 
       if (resp.status === "success") {
-        // Clear input fields after successful authentication
+        
         setEmail("");
         setPassword("");
         setError("");
-        // console.log("API call successful"); // Log success message
         setAuthorized(true);
       } else {
         console.log("Authentication failed"); // Log failure message
@@ -76,10 +67,11 @@ function SignIn(props) {
       }
     } catch (error) {
       console.error("An error occurred:", error); // Log the error
-      setError("Incorrect username or password!");
-      // setError(
-      //   "An error occurred while processing your request. Please try again later."
-      // );
+      setError(
+        "An error occurred while processing your request. Please try again later."
+      );
+    } finally{
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -88,11 +80,13 @@ function SignIn(props) {
 
   props.sendDataToParent(isAuth, iskon, ikartik);
 
+  
   function handleOTP() {
     if (!email) {
       alert("Please provide an email address.");
       return;
     }
+    setLoadingOTP(true);
     fetch(
       "https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/email",
       {
@@ -114,15 +108,18 @@ function SignIn(props) {
         console.log(data);
         setOtpFromApi(data.otp);
         alert("OTP sent successfully!");
+        setLoadingOTP(false);
       })
       .catch((error) => {
         console.error("Error sending OTP:", error);
-        alert("not registered");
+        alert("Failed to send OTP. Please try again.");
+        setLoadingOTP(false);
       });
   }
 
 
   const fetchData = async () => {
+    setLoading(true);
     try {
       const uniqueId = email.split("@")[0];
       const url = `https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/professor/login/`;
@@ -139,6 +136,8 @@ function SignIn(props) {
       console.error("Error fetching faculty data:", error);
       alert("incorrect credentials");
       // setLoading(false);
+    }finally{
+      setLoading(false);
     }
   };
 
@@ -146,7 +145,7 @@ function SignIn(props) {
     if (otpFromApi == password) {
       fetchData();
     } else {
-      alert("otp does not matched")
+      alert("otp does not matched");
       setAuthorized(false);
     }
   }
@@ -207,8 +206,15 @@ function SignIn(props) {
             {error && <div className="error">{error}</div>}
           
           <div className="choose">
-            <button id="userLoginButton" className="btns" type="submit" onClick={handleSubmit}>
-              Login
+            <button id="userLoginButton" className="btns" type="submit" onClick={handleSubmit} disabled={loading}>
+            {loading ? (
+              <>
+                Loading...
+                <div className="spinner" /> 
+              </>
+            ) : (
+              "Login"
+            )}
             </button>
           </div>
           <div className="btm">
@@ -248,9 +254,18 @@ function SignIn(props) {
               />
               <label>Enter email</label>
             </div>
-            <button onClick={handleOTP} className="otpButton">
-              Send OTP
+            <div className="choose">
+            <button onClick={handleOTP} className="otpButton" disabled={loadingOTP}>
+              {loadingOTP ? (
+                <>
+                Sending....
+                <div className="spinner" />
+                </>
+              ) : (
+                "Send OTP"
+              )}
             </button>
+            </div>
             <div className="input-field">
               <input
                 // id="password-input"
@@ -267,8 +282,15 @@ function SignIn(props) {
           {error && <div className="error">{error}</div>}
 
           <div className="choose">
-            <button className="btns" type="submit" onClick={handleFacultyOtp}>
-              Login
+            <button className="btns" type="submit" onClick={handleFacultyOtp} disabled={loading}>
+            {loading ? (
+              <>
+                Loading...
+                <div className="spinner" />
+              </>
+            ) : (
+              "Login"
+            )}
             </button>
           </div>
           <div className="btm">
