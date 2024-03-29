@@ -8,15 +8,31 @@ import Loader from '../components/Faculty/Loader'
 const FacultyCard = (props) => {
 
  const handleAccept = async () => {
-  
+   console.log("project id in raccepting is: "+props.projectId);
   const url = `https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/professor/approveproject/${props.projectId}/${props.rollno}`;
     try {
       const response = await axios.get(
         url
       );
-      console.log("Project accepted!!!!!!!!"+ response.data);     
+      console.log("Project accepted!!!!!!!!"+ response.data); 
+      alert("accepted")    
     } catch (error) {
       console.error("Error accepting a request:", error);
+      alert("error in accepting the project")
+    }
+  }
+ const handleReject = async () => {
+   console.log("project id in raccepting is: "+props.projectId);
+  const url = `https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/professor/rejectproject/${props.projectId}/${props.rollno}`;
+    try {
+      const response = await axios.get(
+        url
+      );
+      console.log("Project accepted!!!!!!!!"+ response.data); 
+      alert("accepted")    
+    } catch (error) {
+      console.error("Error accepting a request:", error);
+      alert("error in accepting the project")
     }
   }
 
@@ -33,7 +49,7 @@ const FacultyCard = (props) => {
             <p className='info'>Email: {props.email}</p>
             <p className='info'>Resume link: <a href={props.resumeLink}>{props.resumeLink}</a> </p>
             <button onClick={handleAccept} className="accept-button">ACCEPT</button>
-            <button className="reject-button">REJECT</button>
+            <button onClick={handleReject} className="reject-button">REJECT</button>
           </div>
           :  <div className='facultycard'><h1>No student has requested this project.</h1></div>
           
@@ -46,11 +62,13 @@ const FacultyCard = (props) => {
 
 
 const Requests = (props) => {
+  
   const requestedStudentList = props.my;
   // var lengthOfStuddent = requestedStudentList.length;
   var id =requestedStudentList[0] ;
   console.log("requested called!!");
   console.log(requestedStudentList);
+
 
   // const requestedStudentList = props.my; // Replace with your actual list of student IDs
   const [studentDataArray, setStudentDataArray] = useState([]); // Initialize an empty array
@@ -79,7 +97,7 @@ const Requests = (props) => {
         setStudentDataArray((prevArray) => [...prevArray, studentData]);
         console.log("Student requested data for ID", id);
         console.log(studentDataArray);
-        setLoading(false);
+        setLoading(false); 
       } catch (error) {
         console.error('Error fetching student data:', error);
         setLoading(false);

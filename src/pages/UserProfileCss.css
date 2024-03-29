@@ -1,147 +1,50 @@
-.container9 {
-    margin: 70px 20px;
-    margin-left: -120px;
-    margin-right:100px;
-    height:328px;
-     /* background-color: #b3d4b7;  */
-  }
-  .container8{
-    margin: -100px 400px;
-    width:1025px;
-    height:136px;
-    margin-left: 252px;
-    background-color: #b3d3d4;
-    /* border: solid rgba(21, 100, 218, 0.863); */
-  }
-  .row {
-    display: flex;
-    flex-direction:row-reverse;
-    background-color:#b3d3d4 ;
-    /* border: solid rgba(21, 100, 218, 0.863); */
-    margin: 0px 111px 0px 372px;
-    justify-content: space-between;
-  }
-  
-  
-  .col-md-3 {
-    flex: 0 0 25%; 
-    max-width: 25%; 
-  }
-  
-  .col-md-9 {
-    flex: 0 0 55%; 
-    max-width:75%;
-    /* padding-left: 25rem; */
-  } 
-  
-  .profile-info {
-    z-index: 0;
-    padding: 30px;
-    background-color: #b3d3d4;
-    border-radius: 0px;
-    /* background-color: transparent; */
-  }
-  .profile-info1{
-    margin:-20px -20px;
-    height:40px;
-  }
-  
-  .row .col-md-3 .profile-img {
-    max-width: 200px;
-    border-radius: 200px;
-    margin: 10px -40px; 
-    display: block; 
-    height: auto;
-   
-    z-index: 1; 
-  }
-  
-  
-  .profile-info-item {
-    margin-bottom: 20px;
-  }
-  
-  .profile-info-item h3 {
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #2d2c2c;
-  }
-  
-  .profile-info-item h4 {
-    margin: 0;
-    color: #666;
-  }
-  
-  /* input[type="text"],
-  input[type="password"] {
-    width: 200px;
-    margin-right: 10px;
-    padding: 5px;
-    border: 1px solid #ff0000;
-    border-radius: 3px;
-  }
-   */
-  /* button {
-    padding: 6px 10px;
-    background-color: #6d7d8e;
-    color: #efe7e7;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    margin: 10px 0px;
-  }
-  
-  button:hover {
-    background-color: #1e446d;
-  }
-   */
-  
-  .table-container {
-    margin-top: 0px;
-    width:56rem;
-    
-  }
-  .table-container1{
-    margin-top:20px;
-    width:56rem;
-  }
-  .tableid{
-    width:40px;
-  }
-  .tableproject{
-    width:300px;
-  }
-  .tablestatus{
-    width:300px;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  th, td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid black; 
-    border-right: 1px solid black; 
-  }
-  
-  th:first-child, td:first-child {
-    border-left: 1px solid black; 
-  }
-  
-  th {
-    background-color: white;
-  }
-  
-  tr:first-child th {
-    border-top: 1px solid black; 
-  }
-  tr:first-child td {
-    border-top: 1px solid black; 
-  }
-  
-  tr:hover {
-    background-color: #f5f5f5; 
-  }
+.profile-container100 {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color:rgb(249, 249, 249);
+}
+.profile-container100:hover{
+
+  box-shadow: 0px 0px 10px rgb(137, 224, 255);
+}
+
+.profile-section100 {
+  margin-bottom: 20px;
+}
+
+.profile-section100 h2 {
+  margin-bottom: 10px;
+}
+
+.info-item100 {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.info-item100 span {
+  margin-right: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}

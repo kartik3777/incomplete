@@ -1,10 +1,7 @@
-import React,{ useState,  }from "react";
-import { useParams } from "react-router-dom";
+import React,{ useState }from "react";
 import axios from 'axios';
 
 function ResetPassword(props){
-  let { id } = useParams();
-  // console.log("end point of resetpassword is: "+ id);
     // const [showPassword, setShowPassword] = useState(false);
     const [data, setData] =useState({
         password: "",
@@ -33,10 +30,11 @@ function ResetPassword(props){
         }
     
         try {
-         
-            const response = await axios.post(`https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/resetPassword/${id}`, {
+          const resetToken = props.resetToken;
+            const response = await axios.post(`https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/resetPassword/`, {
               password: data.password,
               confirmpassword: data.confirmpassword,
+                token: resetToken
             });
             console.log(response.data);
             alert("Password reset successful!");

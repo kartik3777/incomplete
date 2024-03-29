@@ -30,7 +30,7 @@ function NavBar(props) {
 
                 </div>
                 <Outlet />
-                <div className="footer">
+                {/* <div className="footer">
                     <div className="footertop">
                         <div className="left">
                             <img className="logox" src="./images/iitk.gif" alt="" />
@@ -59,7 +59,7 @@ function NavBar(props) {
                         </div>
 
                     </div>
-                </div>
+                </div> */}
             </>
         )
     } else {
@@ -81,7 +81,7 @@ function NavBar(props) {
 
                 </div>
                 <Outlet />
-                <div className="footer">
+                {/* <div className="footer">
                     <div className="footertop">
                         <div className="left">
                             <img className="logox" src="./images/iitk.gif" alt="" />
@@ -112,7 +112,7 @@ function NavBar(props) {
                         </div>
 
                     </div>
-                </div>
+                </div> */}
             </>
         )
 

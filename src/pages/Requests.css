@@ -36,6 +36,7 @@
     background-color: rgb(255, 255, 255);
     color: black;
     border: 2px solid rgb(111, 142, 176);
+    cursor: pointer;
 }
 
 .reject-button{
@@ -45,6 +46,7 @@
      background-color: rgb(255, 255, 255);
      color: black;
      border: 2px solid rgb(111, 142, 176);
+     cursor: pointer;
 }
 
 .accept-button:hover{

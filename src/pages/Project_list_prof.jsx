@@ -11,6 +11,13 @@ function TotalProjects(props) {
     // console.log("inside handleReq");
     // console.log(props.studentsRequested);
     props.req(props.studentsRequested);
+    // props.getProjectId(props.projectId);
+    console.log("request button clicked");
+    setTimeout(function () {
+      props.getProjectId(props.projectId);
+      console.log('project id sended after 2s');
+      console.log(props.projectId);
+    }, 2000);
   }
   console.log("inside total projects "+ props.projectId);
   // console.log("students requestedd");
@@ -111,7 +118,7 @@ function Project_list_prof(props) {
       setLoading(false);
     } catch (error) {
       console.error('Error fetching faculty data:', error);
-      setLoading(false);
+      setLoading(false); //chnaged true from false
     }
   };
   
@@ -156,6 +163,7 @@ function Project_list_prof(props) {
             projectId ={item._id}
             studentsRequested = {item.studentsRequested}
             req = {props.req}
+            getProjectId ={props.getProjectId}
           />
         ))
       )}

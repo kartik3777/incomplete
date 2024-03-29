@@ -10,108 +10,76 @@ function ProfileCard(props) {
     const handleDetailsClick =() => {
         navigate('/ProjectDesc');
     };
-    return (
-        <div className="container9">
-            <div className="row">
-                <div className="col-md-3">
-                    <img src={props.image} alt="student pic" className="profile-img" />
+//     return (
+//     <div className="profile-container100">
+//       <div className="profile-info100">
+//         <h2>My Profile</h2>
+//         <p><strong>Name:</strong> {props.name}</p>
+//         <p><strong>Roll No:</strong> {props.rollno}</p>
+//         <p><strong>Email:</strong> {props.email}</p>
+//         <p><strong>LinkedIn Profile:</strong> <a href={props.resume} className="profile-linkedin" target="_blank" rel="noopener noreferrer">Visit Profile</a></p>
+//       </div>
+//     </div>
+//   ); 
+   return (
+        <div className="profile-container100">
+            <div className="profile-section100">
+               <h2>Personal Information</h2>
+                <div className="profile-info100">
+                   <p><strong>Name:</strong> {props.name}</p>
+                   <p><strong>Roll No:</strong> {props.rollno}</p>
+                   <p><strong>Email:</strong> {props.email}</p>
+                   <p><strong>Resume Link:</strong> <a href={props.resume} className="profile-linkedin" target="_blank" rel="noopener noreferrer">See Resume</a></p>
                 </div>
-                <div className="col-md-9">
-                    <div className="profile-info">
-                        <div className="profile-info-item">
-                            <h3>Name: {props.name}</h3>
-                        </div>
-                        <div className="profile-info-item">
-                            <h3>Roll No: {props.rollno}</h3>
-                        </div>
-                        <div className="profile-info-item">
-                            <h3>Email Id: {props.email}</h3>
-                        </div>
-                        <div className="profile-info-item">
-                            <h3>Resume Link: {props.resume}</h3>
-                        </div>
-                        
-                        <div className="table-container">
-                            <h2>Projects History</h2>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th className='tableid'>Sr.No.</th>
-                                        <th className='tableproject'>Project Name</th>
-                                        <th className='tablestatus'>Accepted/Rejected</th>
-                                        <th>Professor Name</th>
-                                        {/* <th>Details</th> */}
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+            </div>
+            <div className="profile-section100">
+                <h2>Project History</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sr.No.</th>
+                            <th>Project Name</th>
+                            <th>Status</th>
+                            <th>Professor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {props.arrAccepted.map((project,index) => (
+                            <tr key={index+1}>
+                                <td>{index+1}</td>
+                                <td>{project.name}</td>
+                                <td>Accepted</td>
+                                <td>Parth Sarthi {/*props.arrAccepted.offeredByProf.name*/ }</td>
+                            </tr>
+                        ))}
+                        {props.arrRequested.map((project,index) => (
+                            <tr key={index+1+props.arrAccepted.length}>
+                                <td>{index+1+props.arrAccepted.length}</td>
+                                <td>{project.name}</td>
+                                <td>Pending</td>
+                                <td>Parth Sarthi {/*props.arrRequested.offeredByProf.name*/ }</td>
+                            </tr>
+                        ))}
+                        {props.arrRejected.map((project,index) => (
+                            <tr key={index+1+props.arrAccepted.length+props.arrRequested.length}>
+                                <td>{index+1+props.arrAccepted.length+props.arrRequested.length}</td>
+                                <td>{project.name}</td>
+                                <td>Rejected</td>
+                                <td>Parth Sarthi {/*props.arrRejected.offeredByProf.name*/ }</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
         </div>
     );
 }
 
-function ProfileCard1(project) {
-    const navigate = useNavigate();
-
-    const handleDetailsClick =() => {
-        navigate('/ProjectDesc');
-    };
-    return (
-        <div className="container8">
-            <div className="row8">
-                {/* <div className="col-md-3">
-                    <img src={user.image} alt="student pic" className="profile-img" />
-                </div> */}
-                <div className="col-md-98">
-                    <div className="profile-info1">                        
-                        <div className="table-container1">
-                            <h2></h2>
-                            <table>
-                                <tbody>
-                                    {/* Sample table data */}
-                                    <tr>
-                                        <td className='tableid'>{project.id}</td>
-                                        <td className='tableproject'>{project.name}</td>
-                                        <td className='tablestatus'>{project.status}</td>
-                                        <td>{project.prof}</td>
-                                        {/* <td><button onClick={() => handleDetailsClick()}>Details</button></td> */}
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-}
 
 function UserProfile(props){
   const  myData = props.logedInStudentData
-  const studentProjectsIdArray = props.logedInStudentData.projectsRequested;
     //   console.log("data in userProfile: "+myData);
-//   const [oneUserData, setOneUserData] = useState(null);
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const response = await fetch(`https://mohdnasar.vercel.app/api/user/faculty/abhas/${myData}`); //"abhas" should be replaced by "unique id" of professor signed in
-//         if (!response.ok) {
-//           throw new Error('Failed to fetch oneUserData data');
-//         }
-//         const data = await response.json();
-//         setOneUserData(data);
-        
-//         console.log(data);
-//       } catch (error) {
-//         console.error('Error fetching oneUserData data:', error);
-//       }
-//     };
-
-//     fetchData();
-//   }, []);
+      console.log(myData);
 
     return (
         <div className='flexcard8'>
@@ -120,41 +88,12 @@ function UserProfile(props){
                     name  ={myData.name}
                     email = {myData.email}
                     //image = {item.image}
-                    interest = "no"
                    resume ={myData.resumeLink}
                     rollno={myData.rollno}
-                    image="sjnv"
+                    arrRequested={myData.projectsRequested}
+                    arrAccepted={myData.projectsEnrolled}
+                    arrRejected={myData.projectsRejected}
                    />
-                            
-                              {/* {
-                UserDetails.UserDetails.map((item) => {
-            return (
-                   <ProfileCard  
-                    name  ={item.name}
-                    email = {item.email}
-                    //image = {item.image}
-                    interest = {item.interest}
-                    branch ={item.branch}
-                    rollno={item.rollno}
-                    image={item.image}
-                   />
-                  )
-                })
-            } */}
-            {/* {
-                UserDetails.Projects.map((item)=>{
-                    return(
-                        <ProfileCard1
-                         id={item.id}
-                         name={item.name}
-                         status={item.status}
-                         prof={item.prof}
-                        />
-                    )
-                }
-                )
-            } */}
-        
         </div>
       )
 }

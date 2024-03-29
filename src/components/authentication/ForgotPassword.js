@@ -47,10 +47,18 @@ function ForgotPassword(props) {
       .then((data) => {
         console.log(data);
         alert("A Reset link has been sent to your Email adress.");
+
+         //\\
+        //  \\
+        // here change the data.token name according to data coming from api
+
+        console.log("token from api is: "+ data.resetToken );
+        props.getToken(data.resetToken);
+        //  props.getToken("cc6fbbf18567274b8f27f37652fc90893efeea8733fa21cbec02c026ec01b1e5");
       })
       .catch((error) => {
         console.error("Error sending token link:", error);
-        alert("Failed to send please try again.");
+        alert("User not registered");
       });
   };
 

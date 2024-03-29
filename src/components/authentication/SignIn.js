@@ -30,12 +30,20 @@ function SignIn(props) {
     setPassword("");
   }
 
+  // window.addEventListener("keypress", function(event) {
+  //   if (event.key === "Enter") {
+  //     // alert("enter keyb working");
+  //     // event.preventDefault();
+  //     handleSubmit(event);
+  //   }
+  // });
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!email || !password) {
       setError("Email and password are required!");
-      return; 
+      return; // Exit early if validation fails
     }
 
     const url =
@@ -56,10 +64,11 @@ function SignIn(props) {
       setRoll(resp.data.user.rollno);
 
       if (resp.status === "success") {
-        
+        // Clear input fields after successful authentication
         setEmail("");
         setPassword("");
         setError("");
+        // console.log("API call successful"); // Log success message
         setAuthorized(true);
       } else {
         console.log("Authentication failed"); // Log failure message
@@ -67,9 +76,10 @@ function SignIn(props) {
       }
     } catch (error) {
       console.error("An error occurred:", error); // Log the error
-      setError(
-        "An error occurred while processing your request. Please try again later."
-      );
+      setError("Incorrect username or password!");
+      // setError(
+      //   "An error occurred while processing your request. Please try again later."
+      // );
     }
   };
   useEffect(() => {
@@ -78,7 +88,6 @@ function SignIn(props) {
 
   props.sendDataToParent(isAuth, iskon, ikartik);
 
-  
   function handleOTP() {
     if (!email) {
       alert("Please provide an email address.");
@@ -108,7 +117,7 @@ function SignIn(props) {
       })
       .catch((error) => {
         console.error("Error sending OTP:", error);
-        alert("Failed to send OTP. Please try again.");
+        alert("not registered");
       });
   }
 
