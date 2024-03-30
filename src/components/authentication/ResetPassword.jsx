@@ -54,7 +54,7 @@ function ResetPassword(props){
     return(
     <div className='login-position'>
     <div className='login-box-2'>
-        <div className='reset-heading'>RESET PASSWORD</div>
+        <div className='reset-heading'>Reset Password</div>
           <div className='cont2'>
           <div className="input-field">
             <input

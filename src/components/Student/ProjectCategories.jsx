@@ -4,12 +4,16 @@ import "./projectcard.css";
 import ProjectDetails from "./projectdetails";
 import "./ProjectDesc.jsx";
 import { Link } from "react-router-dom";
+import Loader from '../Faculty/Loader';
+
+let count=0;
 
 function TotalProjects(props) {
   // console.log(props.rollno);
   const user = {
   };
-
+  const [loading, setLoading] = useState(false);
+  
   function expand() {
     const projectDiv = document.getElementById(`project-${props.index}`);
     const button = document.getElementById(`expand-button-${props.index}`);
@@ -23,15 +27,37 @@ function TotalProjects(props) {
     }
   }
 
-
+  
 
 
   const handleSubmit = async (e) => {
-
-    if(props.total>=5){
-      alert("You have exceeded Projects Request Limit");
+    if(count>0){
+      alert("You can't request multiple project in single login. Please Logout and Login again to request another project");
       return;
     }
+    if(props.total>=5){
+      alert("You are exceeding the number of Request Project Limit.");
+      return;
+    }
+    for(let i=0; i<props.arrRequest.length; i++){
+      if(props.arrRequest[i]._id==props.index){
+        alert("You have already Requested this Project.");
+        return;
+      }
+    }
+    for(let i=0; i<props.arrAccept.lenght; i++){
+      if(props.arrAccept[i]._id==props.index){
+        alert("You are already Enrolled in this Project.");
+        return;
+      }
+    }
+    for(let i=0; i<props.arrReject.length; i++){
+      if(props.arrReject[i]._id==props.index){
+        alert("Proffesor had rejected you for this Project.");
+        return;
+      }
+    }
+    setLoading(true);
     e.preventDefault();
     const btnData = document.getElementById("request-vala-button").innerText;
     if(btnData === "Request"){
@@ -43,29 +69,35 @@ function TotalProjects(props) {
   
         const response = await axios.post(url, user);
         // console.log(response.status);
-  
+        setLoading(false);
         if (response.status === 201) {
-          console.log("requesting a project!!");
           console.log(response);
           document.getElementById("request-vala-button").innerText =  "Requested!!";
+          alert("You have succesfully Requested this project!");
         } else {
           console.error('Failed to create project');
         }
+
+        
       } catch (error) {
         console.error('Error creating project:', error.message);
+        
       }
 
     }else{
       alert("Already Requested.");
     }
-   
+    count+=1;
   };
-
 
 
   return (
 
     <div id={`project-${props.index}`} className="each-project">
+      {loading ? (
+        <Loader />
+      ):(
+      <div>
       <h2>{props.name}</h2>
       <p>{props.details}</p>
       <div className="normal-details">
@@ -123,11 +155,10 @@ function TotalProjects(props) {
           </span>
 
         </div>
-
+        </div>
       </div>
-
+      )}
       <div  className="request-button-css"><button id="request-vala-button" onClick={handleSubmit}>Request</button></div>
-
     </div>
   );
 }
@@ -135,6 +166,7 @@ function TotalProjects(props) {
 function ProjectCategory(props) {
 
   const [facultyData, setFacultyData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -144,8 +176,10 @@ function ProjectCategory(props) {
         );
         console.log(response.data);
         setFacultyData(response.data); // Assuming the response contains an array of faculty data
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching faculty data:", error);
+        setLoading(false);
       }
     };
 
@@ -153,7 +187,9 @@ function ProjectCategory(props) {
   }, []);
   // console.log("faculty data is",facultyData);
 
-
+  if(loading){
+    return <Loader /> ;
+  }
 
   return (
     <div className="outer-background">
@@ -187,13 +223,16 @@ function ProjectCategory(props) {
                 preReq={item.openfor}
                 resume={item.resumerequired}
                 students={item.studentRegistered}
-               
+                // total={item.maxstudents}
                 isResume={item.resumerequired}
                 isRequest={item.isRequest}
                 logedInStudentData={props.logedInStudentData}
                 id = {props.ProjectDetails}
                 rollno={props.rollno}
                 total={props.logedInStudentData.projectsRequested.length}
+                arrRequest={props.logedInStudentData.projectsRequested}
+                arrAccept={props.logedInStudentData.projectsEnrolled}
+                arrReject={props.logedInStudentData.projectsRejected}
               />
             );
           })

@@ -11,6 +11,7 @@ function SignUp(){
             alert("Please provide an email address.");
             return;
         }
+        setLoadingOTP(true);
         fetch('https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/email', {
             method: 'POST',
             headers: {
@@ -30,11 +31,14 @@ function SignUp(){
             console.log(data);
             setOTPData(data); 
             alert("OTP sent successfully!");
+            setLoadingOTP(false);
         })
         .catch(error => {
             console.error('Error sending OTP:', error);
             alert("Failed to send OTP. Please try again.");
+            setLoadingOTP(false);
         });
+        
   }
 
 
@@ -52,6 +56,7 @@ function SignUp(){
 
    const [OTP, setOTP] = useState("");
    const [OTPData, setOTPData] = useState(null);
+   const [loadingOTP, setLoadingOTP] = useState(false);
 
    function handleChange(e){
    const {name, value} = e.target;
@@ -99,7 +104,7 @@ function SignUp(){
         alert("OTP verification failed. Please try again.");
         return;
     }
-
+    
     fetch('https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/signup', {
         method: 'POST',
         headers: {
@@ -153,7 +158,7 @@ function SignUp(){
         <>
         <div className='login-position'>
         <div className='login-box-2'>
-            <div className='login-heading'>REGISTER</div>
+            <div className='login-heading'>Register</div>
               <div className='cont2'>
                  <div className='input-field' >
                     <input   onKeyPress={handleKeyPress} onChange={handleChange} value={data.name} name='name' type="text" required="required" />
@@ -167,7 +172,16 @@ function SignUp(){
                     <input  onKeyPress={handleKeyPress2} onChange={handleChange} value={data.email} name='email' type="email" required="required" /> 
                     <label>Enter Your IITK Mail-Id</label>
                  </div>
-                 <button onClick={handleOTP} className='otpButton'>Send OTP</button>
+                 <button onClick={handleOTP} className='otpButton' disabled={loadingOTP}>
+                 {loadingOTP ? (
+                <>
+                Sending....
+                <div className="spinner" />
+                </>
+              ) : (
+                "Send OTP"
+              )}
+                 </button>
                  <div className='input-field'>
                     <input  onKeyPress={handleKeyPress} onChange={handleChange} value={OTP} name='OTP' type="text" required="required" /> 
                     <label>Enter OTP</label>

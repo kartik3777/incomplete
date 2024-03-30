@@ -106,11 +106,13 @@ function SignIn(props) {
         console.log(data);
         setOtpFromApi(data.otp);
         alert("OTP sent successfully!");
+        document.getElementsByClassName("otpButton")[0].innerTEXT ="done"
         setLoadingOTP(false);
       })
       .catch((error) => {
         console.error("Error sending OTP:", error);
         alert("Not registered, contact developer's team to register");
+        // document.getElementsByClassName("otpButton")[0].innerHTML ="Send OTP"
         setLoadingOTP(false);
       });
   }

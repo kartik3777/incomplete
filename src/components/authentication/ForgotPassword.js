@@ -71,7 +71,7 @@ function ForgotPassword(props) {
   return (
     <div className="login-position">
       <div className="login-box-2">
-        <div className="reset-heading">RESET PASSWORD</div>
+        <div className="reset-heading">Reset Password</div>
         <div className="cont2">
           <div className="input-field">
             <input
@@ -82,7 +82,7 @@ function ForgotPassword(props) {
               type="email"
               required="required"
             />
-            <label>Enter Your Gmail</label>
+            <label>Enter Your Email id</label>
           </div>
         </div>
         <button onClick={handleSubmit} className="btn">

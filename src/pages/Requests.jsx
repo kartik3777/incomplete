@@ -47,7 +47,7 @@ const FacultyCard = (props) => {
             <p className='info'>Cpi: {props.cpi}</p>
             <p className='info'>Roll Number: {props.rollno}</p>
             <p className='info'>Email: {props.email}</p>
-            <p className='info'>Resume link: <a href={props.resumeLink}>{props.resumeLink}</a> </p>
+            <p className='info'>Resume link: <a href={props.resumeLink} target='blank'>{props.resumeLink}</a> </p>
             <button onClick={handleAccept} className="accept-button">ACCEPT</button>
             <button onClick={handleReject} className="reject-button">REJECT</button>
           </div>
