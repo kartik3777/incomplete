@@ -28,7 +28,7 @@ function Menu() {
     <div className="menu-box">
        <span id='open' style= {{fontSize: "40px", cursor:"pointer"}} onClick={OpenNav}>&#9776;</span>
         <ul id='mymenu' className='menu'>
-         <li  className="closebtn" onClick={CloseNav}>&times; close</li>
+         <li style= {{fontSize: "45px", cursor:"pointer"}} className="closebtn" onClick={CloseNav}>&times;</li>
           <li onClick={() => {showDepartment("Computer Science And Engineering")}} className="dabba dabba1"><Link onClick={CloseNav}  id='cse'  to="/Faculty/Cse">Computer Science And Engineering</Link></li>
           <li className="dabba dabba2"><Link onClick={CloseNav} id='ee' to="/Faculty/Ee">Electrical</Link></li>
           <li onClick={() => {showDepartment("Civil Engineering")}} className=" dabba dabba3"><Link onClick={CloseNav} id='ce' to="/Faculty/Ce">Civil Engineering</Link></li>

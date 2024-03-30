@@ -110,7 +110,7 @@ function SignIn(props) {
       })
       .catch((error) => {
         console.error("Error sending OTP:", error);
-        alert("Failed to send OTP. Please try again.");
+        alert("Not registered, contact developer's team to register");
         setLoadingOTP(false);
       });
   }

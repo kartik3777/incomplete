@@ -6,24 +6,27 @@ import { useNavigate } from 'react-router-dom';
 
 function ProfCard(props){
   const navigate = useNavigate();
+
   function showProjectsOfOneProject(){
+
     const uniqueId = props.email.split("@")[0];
     props.getFacultyIdForProject(uniqueId);
     navigate("/OneProfProjects");
- 
-
   }
+  //https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/340px-Default_pfp.svg.png
+
+  //https://us.123rf.com/450wm/triken/triken1608/triken160800029/61320775-male-avatar-profile-picture-default-user-avatar-guest-avatar-simply-human-head-vector-illustration.jpg?ver=6
      
     return(
         <div onClick={showProjectsOfOneProject} className='prof-card'>
             <div className='box-1'>
                 <div className="prof-dp">
-                    <div className='circle'>
-                    <img src="users.png" alt="" />
+                    <div className='circle-prof'>
+                   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/340px-Default_pfp.svg.png" alt="image" />
                     </div>
                 </div>
                 <div className="prof-details">
-                    <h2>{props.name}</h2>
+                    <h3>{props.name}</h3>
                     <p>{props.desig}</p>
                    <p>{props.phone}</p>
                    <p>{props.address}</p>

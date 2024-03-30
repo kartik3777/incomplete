@@ -4,7 +4,7 @@ import '../prof.css'
 
 function Ee(props) {
   return (
-    <div>
+    <div className='faculty-main-api'>
       <h2>This is Electrical faculty page </h2>
       <Prof getFacultyIdForProject={props.getFacultyIdForProject} departmentName = "Electrical Engineering" />
     </div>

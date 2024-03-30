@@ -7,7 +7,7 @@
     padding: 0;
     height: 60px;
     overflow: hidden;
-    background-color: #0a0338;
+    background-color:  transparent;
   }
   
  .nav ul li {
@@ -29,7 +29,7 @@
   }
   .heading{
      width: 400px;
-     background-color:  rgb(8, 0, 55);
+     background-color:  transparent;
      display: flex;
     justify-content: center;
     gap: 30px;
@@ -42,7 +42,7 @@
     padding: 0;
     height: 70px;
     /* overflow: hidden; */
-    background-color: #090138;
+    background-color:  #050024;
     display: flex;
     justify-content: space-between;
     position: fixed;
