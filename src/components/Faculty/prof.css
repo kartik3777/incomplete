@@ -91,7 +91,8 @@ body{
 .menu-box ul li{
     font-size: 16px;
     text-align: left;
-    transition: 0.5s;
+    /* transition: 0.5s; */
+
 }
 #cse,#ce,#ee,#ae,#che,#dms,#me,#mse,#phy{
     /* color: rgb(127, 255, 249); */
@@ -105,7 +106,7 @@ body{
     /* pointer-events: none; */
     cursor: pointer;
     text-decoration: none;
-    /* transition: none 20ms; */
+    /* transition: none; */
 }
 .dabba:hover{
     /* background-color: rgb(1, 40, 58); */

@@ -16,7 +16,7 @@ function NavBar(props) {
             <>
                 <div className="nav">
                     <div className="heading">
-                        <img className="logo" src="./images/iitk.gif" alt="" />
+                        <img className="logo" src="./images/logo-main.png" alt="" />
                         <h1>ProfInfo Central</h1>
                     </div>
                     <ul>
@@ -67,7 +67,7 @@ function NavBar(props) {
             <>
                 <div className="nav">
                     <div className="heading">
-                        <img className="logo" src="./images/iitk.gif" alt="" />
+                        <img className="logo" src="./images/logo-main.png" alt="" />
                         <h1>ProfInfo Central</h1>
                     </div>
                     <ul>

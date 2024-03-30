@@ -24,18 +24,23 @@
     text-decoration: none;
   }
   .logo{
-     height: 50px;
-     width: 50px;
+     height: 60px;
+     width: 60px;
+     overflow: hidden;
+     display: grid;
+     place-items: center;
   }
   .heading{
-     width: 400px;
+     width: auto;
      background-color:  transparent;
      display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 10px;
     color: white;
     align-items: center;
     font-size: 1.3em;
+    overflow: hidden;
+    margin-left: 14px;
   }
   .nav{
     margin: 0;
