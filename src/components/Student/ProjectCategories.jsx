@@ -123,7 +123,7 @@ function TotalProjects(props) {
             Proffesor :{" "}
             <span
               style={{ color: "black", fontWeight: "500", fontSize: "15px" }}
-            >
+            > 
               {props.Name}
             </span>
           </span>
@@ -150,7 +150,7 @@ function TotalProjects(props) {
             <span
               style={{ color: "black", fontWeight: "500", fontSize: "15px" }}
             >
-              {props.students}/{props.total}
+              {props.students}/{props.maxstudents}
             </span>
           </span>
 
@@ -201,6 +201,7 @@ function ProjectCategory(props) {
 
         {
           facultyData.map((item, index) => {
+            console.log("prof name in list::::"+ item.offeredByProf.name);
             return (
               
               <TotalProjects
@@ -212,7 +213,7 @@ function ProjectCategory(props) {
                 // index={item.name + index} // Note: You might want to use a unique identifier here
 
                 name={item.name}
-                Name={item.name}
+                Name={item.offeredByProf.name}
                 email={item.email}
                 details={item.description}
                 cpi={item.cpirequired}
@@ -222,8 +223,8 @@ function ProjectCategory(props) {
                 additional={item.Openfor}
                 preReq={item.openfor}
                 resume={item.resumerequired}
-                students={item.studentRegistered}
-                // total={item.maxstudents}
+                students={item.studentsEnrolled.length}
+                maxstudents={item.maxstudents}
                 isResume={item.resumerequired}
                 isRequest={item.isRequest}
                 logedInStudentData={props.logedInStudentData}
@@ -233,6 +234,7 @@ function ProjectCategory(props) {
                 arrRequest={props.logedInStudentData.projectsRequested}
                 arrAccept={props.logedInStudentData.projectsEnrolled}
                 arrReject={props.logedInStudentData.projectsRejected}
+
               />
             );
           })

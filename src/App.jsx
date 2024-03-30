@@ -84,7 +84,6 @@ function App() {
     };
   const getData = (isAuth, who, ikartik) => {
     // Handle data from child component
-    // console.log("Data received in parent:", ikartik);
     setAuthorization(isAuth);
     setKon(who);
     setLogedInStudentData(ikartik);
