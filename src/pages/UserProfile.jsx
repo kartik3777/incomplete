@@ -57,7 +57,7 @@ function ProfileCard(props) {
                                 <td>{index+1+props.arrAccepted.length}</td>
                                 <td>{project.name}</td>
                                 <td>Pending</td>
-                                <td>Parth Sarthi {/*props.arrRequested.offeredByProf.name*/ }</td>
+                                <td>{project.offeredByProf.name}</td>
                             </tr>
                         ))}
                         {props.arrRejected.map((project,index) => (
