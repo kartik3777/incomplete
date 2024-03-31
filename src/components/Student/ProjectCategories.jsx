@@ -32,7 +32,7 @@ function TotalProjects(props) {
 
   const handleSubmit = async (e) => {
     if(count>0){
-      alert("You can't request multiple project in single login. Please Logout and Login again to request another project");
+      alert("You can't request multiple project in single login. Please Logout and refresh and then Login again to request another project");
       return;
     }
     if(props.total>=5){
@@ -120,7 +120,7 @@ function TotalProjects(props) {
       <div className="side-karo">
         <div className="expanded-details">
           <span style={{ color: "blue", fontWeight: "530" }}>
-            Proffesor :{" "}
+            Professor :{" "}
             <span
               style={{ color: "black", fontWeight: "500", fontSize: "15px" }}
             > 

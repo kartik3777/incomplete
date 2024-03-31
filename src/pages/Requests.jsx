@@ -28,11 +28,11 @@ const FacultyCard = (props) => {
       const response = await axios.get(
         url
       );
-      console.log("Project accepted!!!!!!!!"+ response.data); 
-      alert("accepted")    
+      console.log("Project rejected!!!!!!!!"+ response.data); 
+      alert("rejected")    
     } catch (error) {
-      console.error("Error accepting a request:", error);
-      alert("error in accepting the project")
+      console.error("Error rejecting a request:", error);
+      alert("error in rejecting the project")
     }
   }
 
@@ -41,22 +41,38 @@ const FacultyCard = (props) => {
       // props.registered.length > 0 ?
         // props.registered.map((student, index) => (
           
-            props.name ?  <div key={props.index} className="facultycard">
-            {/* <h2 className='BC'>Project: {props.project}</h2> */}
-            <p className='info'>Name: {props.name}</p>
-            <p className='info'>Cpi: {props.cpi}</p>
-            <p className='info'>Roll Number: {props.rollno}</p>
-            <p className='info'>Email: {props.email}</p>
-            <p className='info'>Resume link: <a href={props.resumeLink} target='blank'>{props.resumeLink}</a> </p>
-            <button onClick={handleAccept} className="accept-button">ACCEPT</button>
-            <button onClick={handleReject} className="reject-button">REJECT</button>
-          </div>
-          :  <div className='facultycard'><h1>No student has requested this project.</h1></div>
+        props.name ?  <div key={props.index} className="facultycard">
+        <div className="card-content">
+     <h2 className="name">{props.name}</h2>
+     <p>
+     <span className='headings'>Roll No:</span>
+      <span className='info'>{props.rollno}</span>
+      </p>
+      <p>
+     <span className='headings'>Email:</span>
+      <span className='info'>{props.email}</span>
+      </p>
+      <p>
+     <span className='headings'>Current CPI:</span>
+      <span className='info'>{props.cpi}</span>
+      </p>
+      <p>
+     <span className='headings'>Resume link:</span> <span className='info'><a href={props.resumeLink} target='_blank' rel="noopener noreferrer">{props.rollno}-Resume</a></span>
+     </p>
+   </div>
+   <div className="card-actions">
+     <button  onClick={handleAccept} className="accept-button">Accept</button>
+     <button onClick={handleReject} className="reject-button">Reject</button>
+   </div>
+       </div>
+     :  <div className='facultycard'><h1>No student has requested this project.</h1></div>
+
+ 
           
-         
         // ))
       //   : <div className='facultycard'><h1>No student has requested this project.</h1></div>
       // : <div></div>
+
   );
 };
 
@@ -68,8 +84,6 @@ const Requests = (props) => {
   var id =requestedStudentList[0] ;
   console.log("requested called!!");
   console.log(requestedStudentList);
-
-
   // const requestedStudentList = props.my; // Replace with your actual list of student IDs
   const [studentDataArray, setStudentDataArray] = useState([]); // Initialize an empty array
   const [loading, setLoading] =useState(true);
@@ -112,7 +126,7 @@ const Requests = (props) => {
 
   return (
     <div>
-      <div className='MC'>
+      <div className='requestContainer'>
         {/* {requestedData && requestedData.map((item, index) => ( */}
        {/* { useEffect(() => {
         console.log("inside useeffect");
@@ -120,7 +134,8 @@ const Requests = (props) => {
         {loading ? (
           <Loader /> 
         ): (
-            studentDataArray.map((item, index) => {
+
+           studentDataArray && studentDataArray.map((item, index) => {
             return (
               <FacultyCard 
               key ={index}
@@ -134,8 +149,8 @@ const Requests = (props) => {
              projectId ={props.projectId}
               />
             )
-          })
-        )}
+          }) 
+        )} 
         {/* },[id])} */}
        
         {/* <FacultyCard 

@@ -80,7 +80,7 @@ function TotalProjects(props) {
         <div className="side-karo">
           <div className="expanded-details">
             <span style={{ color: "blue", fontWeight: "530" }}>
-              Proffesor :{" "}
+              Professor :{" "}
               <span
                 style={{ color: "black", fontWeight: "500", fontSize: "15px" }}
               >

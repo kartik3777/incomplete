@@ -19,6 +19,25 @@ function TotalProjects(props) {
       console.log(props.projectId);
     }, 2000);
   }
+
+  function handleEnrolled(){
+   // setStudentReq(props.studentsRequested);
+    // console.log("inside handleReq");
+    // console.log(props.studentsRequested);
+    console.log("enrolled clicked");
+    props.en(props.studentsEnrolled);
+    console.log("student enrolled sended from project list");
+    console.log(props.studentsEnrolled);
+    // props.getProjectId(props.projectId);
+    console.log("enrolled clicked");
+    setTimeout(function () {
+      props.getProjectId(props.projectId);
+      console.log('project id sended after 2s');
+      console.log(props.projectId);
+    }, 2000);
+  }
+
+
   console.log("inside total projects "+ props.projectId);
   // console.log("students requestedd");
   // console.log(props.studentsRequested);
@@ -29,13 +48,13 @@ function TotalProjects(props) {
   const expand = () => {
     const projectDiv = document.getElementById(`project-${props.index}`);
     const button = document.getElementById(`expand-button-${props.index}`);
-    if(projectDiv.style.height === '380px'){
+    if(projectDiv.style.height === 'auto'){
       button.innerText ="Show More";
       projectDiv.style.height = '200px';
     }
     else{
       button.innerText ="Show Less ";
-      projectDiv.style.height = '380px';
+      projectDiv.style.height = 'auto';
     }
     setShowDetails(!showDetails);
   };
@@ -63,9 +82,10 @@ function TotalProjects(props) {
   return (
     <div className={`each-project ${showDetails ? 'expanded' : ''}`} id={`project-${props.index}`}>
       <h2>{props.name}</h2>
+     
       <p>{props.details}</p>
       <div className="normal-details">
-      <Link className="a" to="/EnrolledStudents"><button >Enrolled Students</button></Link>
+      <Link className="a" to="/EnrolledStudents"><button onClick={handleEnrolled} >Enrolled Students</button></Link>
       <Link className="a" to="/Requests"><button onClick={handleReq}>Requests</button></Link>
         
         
@@ -162,7 +182,9 @@ function Project_list_prof(props) {
             students={item.maxstudents}
             projectId ={item._id}
             studentsRequested = {item.studentsRequested}
+            studentsEnrolled ={item.studentsEnrolled}
             req = {props.req}
+            en ={props.en}
             getProjectId ={props.getProjectId}
           />
         ))

@@ -1,13 +1,12 @@
 /* Import Google font - Poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
-
-
 .login-position{
     width: 100vw;
     height: auto;
     min-height: 100vh;
-    background: linear-gradient(90deg, #54aabd, #c9e3e6, #0b243f);
+    /* background: linear-gradient(90deg, #54aabd, #c9e3e6, #0b243f); */
+   background-color: rgb(132, 116, 255);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -56,8 +55,8 @@ align-items: flex-end;
   height:47px;
   width:380px;
   /* background: linear-gradient(to right, #FF5F6D, #FFC371); */
-  background:linear-gradient(to right,#244186,#49a09d);
-  
+  /* background:linear-gradient(to right,#244186,#49a09d); */
+  background-color: rgb(180, 180, 251);
   cursor: pointer;
  display: flex;
  justify-content: center;
@@ -68,6 +67,7 @@ align-items: flex-end;
  border-radius: 22px;
  transition: 0.3s;
  letter-spacing: 0.1em;
+ border: none;
 }
 .btns:hover{
   letter-spacing:0.25em;

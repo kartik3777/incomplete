@@ -1,67 +1,89 @@
-.MC{
-    display:flex;
-    flex-wrap:wrap;
-}
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Madimi+One&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
-.facultycard{
-    width: 25%;
-    margin-top: 90px;
-    margin-left: 75px;
-    background-color: rgb(80, 33, 136);
-    padding: 15px;
-    border: 6px solid white;
-    
-    transition:0.3s;
-    background:-webkit-linear-gradient(rgb(133, 127, 179),rgb(107, 220, 222));
-}
-
-.BC{
-    color: rgb(50, 38, 102);
-    text-align: center;
-    font-size: 30px;
-}
-.facultycard:hover {
-    border-image: linear-gradient();
-    border-top-color: rgb(159, 109, 212);
-    border-left-color:rgb(191, 161, 228);
-    border-right-color:rgb(191, 161, 228);
-    border-bottom-color:rgb(196, 174, 223);
-    border-width:6px;
-}
-
-.accept-button{
-    height: 38px;
-    width: auto;
-    margin: auto 85px;
+  .requestContainer{
+      margin-top:70px;
+      /* background-image:-webkit-repeating-linear-gradient(-45deg,#c9e0e7, #88d3e5,#c9e0e7); */
+      background-color:rgb(229, 243, 252);
+      display:flex;
+      flex-wrap:wrap;
+      /* justify-content: center; */
+      align-content: center;
+      padding:20px;
+    min-height: 80vh;
+      /* background: fixed; */
+  }
+  .facultycard {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    padding: 16px;
+    margin-bottom: 25px;
+    /* box-shadow: 0px 0px 10px  rgba(227, 227, 227, 0.756); */
+    border-width: 2px;
+    min-width: 340px;
+    /* border-top-color: aqua; */
+    border-color: rgb(228, 232, 231); ;
+    /* border-right-color:aquamarine; */
+    /* border-left-width: 4px;
+    border-right-width:2px; */
+    /* border-left-color: rgb(38, 96, 189); */
+    max-width: 70%;
+    margin:0 auto 16px auto;
+    border-radius: 25px;
+    /* background-image:radial-gradient(rgb(255, 255, 255),  rgb(162, 187, 217),#086682); */
     background-color: rgb(255, 255, 255);
-    color: black;
-    border: 2px solid rgb(111, 142, 176);
+    transition: transform 0.2s ease;
+  }
+  .facultycard:hover{
+     border-width: 2px;
+     transform: translateY(-10px);
+     /* border-color: rgb(57, 162, 163); */
+     /* background-color:rgb(238, 255, 255); */
+     box-shadow: 0px 0px 20px rgba(217, 217, 217, 0.799);
+
+  }
+  
+  .card-content {
+    margin-bottom: 16px;
+  }
+  .headings{
+    font-weight:600;
+    font-size:medium;
+  }
+  .name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 8px;
+  }
+
+  .info{
+    font-family: "Public Sans", sans-serif;
+    font-weight:400;
+
+  }
+  
+  .card-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .accept-button,
+  .reject-button {
+    background-color:#1c6ee9;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
     cursor: pointer;
-}
-
-.reject-button{
-     height: 38px;
-     width: auto;
-     margin: auto -10px;
-     background-color: rgb(255, 255, 255);
-     color: black;
-     border: 2px solid rgb(111, 142, 176);
-     cursor: pointer;
-}
-
-.accept-button:hover{
-    background-color: rgb(123, 234, 123);
-    -webkit-text-fill-color: rgb(6, 6, 0);
-    border: 2px solid rgb(55, 146, 55);
-}
-
-.reject-button:hover{
-    background-color: rgb(251, 67, 67);
-    -webkit-text-fill-color: rgb(255, 255, 255);
-    border: 2px solid rgb(113, 50, 50);
-}
-
-.info {
-    font-size: 20px; /* Example style */
-    color: black; /* Example style */
+    margin-left: 8px;
+    transition:0.2s;
+  }
+  .accept-button:hover{
+    background-color: #4CAF50;
+  }
+  .reject-button:hover {
+    background-color: #f44336;
   }

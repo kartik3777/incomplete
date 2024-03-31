@@ -49,7 +49,7 @@ function ProfileCard(props) {
                                 <td>{index+1}</td>
                                 <td>{project.name}</td>
                                 <td>Accepted</td>
-                                <td>Parth Sarthi {/*props.arrAccepted.offeredByProf.name*/ }</td>
+                                <td>{project.offeredByProf.name} {/*props.arrAccepted.offeredByProf.name*/ }</td>
                             </tr>
                         ))}
                         {props.arrRequested.map((project,index) => (
@@ -65,7 +65,7 @@ function ProfileCard(props) {
                                 <td>{index+1+props.arrAccepted.length+props.arrRequested.length}</td>
                                 <td>{project.name}</td>
                                 <td>Rejected</td>
-                                <td>Parth Sarthi {/*props.arrRejected.offeredByProf.name*/ }</td>
+                                <td>{project.offeredByProf.name} {/*props.arrRejected.offeredByProf.name*/ }</td>
                             </tr>
                         ))}
                     </tbody>
