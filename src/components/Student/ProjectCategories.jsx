@@ -31,29 +31,32 @@ function TotalProjects(props) {
 
 
   const handleSubmit = async (e) => {
+    if(props.students>=props.maxstudents){
+      alert("Regrettably, you cannot apply for this project as the total selected capacity has been reached.");
+    }
     if(count>0){
-      alert("You can't request multiple project in single login. Please Logout and refresh and then Login again to request another project");
+      alert("You are unable to request multiple projects within a single login session. Please log out, refresh the page, and then log in again to request another project.");
       return;
     }
     if(props.total>=5){
-      alert("You are exceeding the number of Request Project Limit.");
+      alert("You have surpassed the limit for requesting projects.");
       return;
     }
     for(let i=0; i<props.arrRequest.length; i++){
       if(props.arrRequest[i]._id==props.index){
-        alert("You have already Requested this Project.");
+        alert("You have already submitted a request for this project.");
         return;
       }
     }
-    for(let i=0; i<props.arrAccept.lenght; i++){
+    for(let i=0; i<props.arrAccept.length; i++){
       if(props.arrAccept[i]._id==props.index){
-        alert("You are already Enrolled in this Project.");
+        alert("You are already enrolled in this project.");
         return;
       }
     }
     for(let i=0; i<props.arrReject.length; i++){
       if(props.arrReject[i]._id==props.index){
-        alert("Proffesor had rejected you for this Project.");
+        alert("The professor has already rejected your request for this project.");
         return;
       }
     }
@@ -74,6 +77,7 @@ function TotalProjects(props) {
           console.log(response);
           document.getElementById("request-vala-button").innerText =  "Requested!!";
           alert("You have succesfully Requested this project!");
+          count+=1;
         } else {
           console.error('Failed to create project');
         }
@@ -87,7 +91,6 @@ function TotalProjects(props) {
     }else{
       alert("Already Requested.");
     }
-    count+=1;
   };
 
 
@@ -221,7 +224,7 @@ function ProjectCategory(props) {
                 category={item.projectCategory}
                 batches={item.openfor}
                 additional={item.Openfor}
-                preReq={item.openfor}
+                preReq={item.prereg}
                 resume={item.resumerequired}
                 students={item.studentsEnrolled.length}
                 maxstudents={item.maxstudents}
