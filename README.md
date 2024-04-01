@@ -4,7 +4,7 @@ ProfInfo Central is a web application designed to facilitate communication betwe
 
 ## Deployment
 
-The project is deployed and hosted on Vercel. You can access the deployed application [here](https://profinfocentral.vercel.app/).
+The project is deployed and hosted on Vercel. You can access the deployed application [https://profinfocentral.vercel.app/](https://profinfocentral.vercel.app/).
 
 ## Features
 
@@ -40,5 +40,50 @@ The project is deployed and hosted on Vercel. You can access the deployed applic
 ## Installation
 
 1. Clone the repository using
+    ```bash
+        git clone https://github.com/kartik3777/ProfInfo-Central.git
+    ```
+
+2. Navigate to the project directory:
+    ```bash
+          cd ProfInfo-Central
+    ```
+3. Now install the dependencies using:
+   ```bash
+        npm install
+   ```
+4. After installing the dependencies
+   
+   Navigate to the frontend directory using
+   ```bash
+    cd Frontend
+   ```
+5. Start the server using:
+   ```bash
+     npm start
+   ```
+6. Access the application in your web browser at `http://localhost:3000`.
+
+## Usage
+
+1. Register as a student or a professor.
+2. Log in with your credentials.
+3. Students can request projects from professors.
+4. Professors can review and manage project requests.
+5. Log out when done.
+ ## Authors
+1.Pavani priya(220415)
+2.Sontam Deekshitha(221075)
+3.Lakshyta Mahajan(220581)
+4.Kartik(220503)
+5.Atharv Moghe(220250)
+6.Prabhat Kumar Yadav(220774)
+7.Nilesh Maneshwar(220715)
+8.Kuldeep Sandip Thakare(220557)
+9.Mohd Nasar Siddiqui(220661)
+10.Sanapala Jaswanth(220955)
+
+
+
    
 
