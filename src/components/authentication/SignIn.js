@@ -103,7 +103,7 @@ function SignIn(props) {
         }
       })
       .then((data) => {      
-        console.log(data);
+       // console.log(data);
         setOtpFromApi(data.otp);
         alert("OTP sent successfully!");
         // document.getElementById("otpButton").innerText ="sent"
