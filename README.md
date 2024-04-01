@@ -72,16 +72,16 @@ The project is deployed and hosted on Vercel. You can access the deployed applic
 4. Professors can review and manage project requests.
 5. Log out when done.
  ## Authors
-1.Pavani priya(220415)
-2.Sontam Deekshitha(221075)
-3.Lakshyta Mahajan(220581)
-4.Kartik(220503)
-5.Atharv Moghe(220250)
-6.Prabhat Kumar Yadav(220774)
-7.Nilesh Maneshwar(220715)
-8.Kuldeep Sandip Thakare(220557)
-9.Mohd Nasar Siddiqui(220661)
-10.Sanapala Jaswanth(220955)
+-Pavani priya(220415)
+-Sontam Deekshitha(221075)
+-Lakshyta Mahajan(220581)
+-Kartik(220503)
+-Atharv Moghe(220250)
+-Prabhat Kumar Yadav(220774)
+-Nilesh Maneshwar(220715)
+-Kuldeep Sandip Thakare(220557)
+-Mohd Nasar Siddiqui(220661)
+-Sanapala Jaswanth(220955)
 
 
 
