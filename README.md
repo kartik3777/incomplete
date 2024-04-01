@@ -21,8 +21,6 @@ The project is deployed and hosted on Vercel. You can access the deployed applic
 
 - **axios**: A promise-based HTTP client for making HTTP requests from the browser. It's commonly used for communicating with the backend API.
 - **react-router-dom**: Enables routing within a React application, allowing you to define routes and navigate between different components.
-- **react-bootstrap / Material-UI / Ant Design**: UI component libraries for React that provide pre-designed components and styles, helping to build responsive and visually appealing user interfaces quickly.
-
 ### Backend (Express.js):
 
 - **express**: Fast, unopinionated, minimalist web framework for Node.js. It simplifies the process of building APIs and handling HTTP requests.
@@ -41,26 +39,26 @@ The project is deployed and hosted on Vercel. You can access the deployed applic
 
 1. Clone the repository using
     ```bash
-        git clone https://github.com/kartik3777/ProfInfo-Central.git
+    git clone https://github.com/kartik3777/ProfInfo-Central.git
     ```
 
 2. Navigate to the project directory:
     ```bash
-          cd ProfInfo-Central
+    cd ProfInfo-Central
     ```
 3. Now install the dependencies using:
    ```bash
-        npm install
+   npm install
    ```
 4. After installing the dependencies
    
    Navigate to the frontend directory using
    ```bash
-    cd Frontend
+   cd Frontend
    ```
 5. Start the server using:
    ```bash
-     npm start
+   npm start
    ```
 6. Access the application in your web browser at `http://localhost:3000`.
 
