@@ -96,7 +96,7 @@ function TotalProjects(props) {
           <div className='expanded-details'>
             <span style={{ color: 'blue', fontWeight: "530" }}>Open for: <span style={{ color: 'black', fontWeight: "500", fontSize: "15px" }}>{props.batches}</span></span>
             <span style={{ color: 'blue', fontWeight: "500" }}>Resume required: <span style={{ color: 'black', fontWeight: "500", fontSize: "15px" }}>{props.resume}</span></span>
-            <span style={{ color: 'blue', fontWeight: "500" }}>Total Students: <span style={{ color: 'black', fontWeight: "500", fontSize: "15px" }}>{props.students}</span></span>
+            <span style={{ color: 'blue', fontWeight: "500" }}>Total Students: <span style={{ color: 'black', fontWeight: "500", fontSize: "15px" }}>{props.totalEnrolled}/{props.students}</span></span>
             <span style={{ color: 'blue', fontWeight: "500" }}>Project Category: <span style={{ color: 'black', fontWeight: "500", fontSize: "15px" }}>{props.projectCategory}</span></span>
           </div>
           <div className="second-details">
@@ -183,6 +183,7 @@ function Project_list_prof(props) {
             projectId ={item._id}
             studentsRequested = {item.studentsRequested}
             studentsEnrolled ={item.studentsEnrolled}
+            totalEnrolled={item.studentsEnrolled.length}
             req = {props.req}
             en ={props.en}
             getProjectId ={props.getProjectId}
