@@ -28,7 +28,7 @@ function SignUp(){
         })
         .then(data => {
             // handle successful response here
-            console.log(data);
+            // console.log(data);
             setOTPData(data); 
             alert("OTP sent successfully!");
             setLoadingOTP(false);
