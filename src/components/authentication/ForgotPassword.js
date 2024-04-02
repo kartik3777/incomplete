@@ -18,6 +18,7 @@ function ForgotPassword(props) {
       };
     });
   }
+  const[sendingEmail,setSendingEmail]=useState(false);
 
   const handleSubmit = async (event) => {
 
@@ -26,7 +27,7 @@ function ForgotPassword(props) {
         alert("Please enter email id to proceed")
         return;
     }
-
+    setSendingEmail(true);
     fetch(
       "https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/forgotPassword",
       {
@@ -45,7 +46,7 @@ function ForgotPassword(props) {
         }
       })
       .then((data) => {
-        console.log(data);
+        //console.log(data);
         alert("A Reset link has been sent to your Email adress.");
 
          //\\
@@ -54,11 +55,13 @@ function ForgotPassword(props) {
 
         console.log("token from api is: "+ data.resetToken );
         props.getToken(data.resetToken);
+        setSendingEmail(false);
         //  props.getToken("cc6fbbf18567274b8f27f37652fc90893efeea8733fa21cbec02c026ec01b1e5");
       })
       .catch((error) => {
         console.error("Error sending token link:", error);
         alert("User not registered");
+        setSendingEmail(false);
       });
   };
 
@@ -85,8 +88,15 @@ function ForgotPassword(props) {
             <label>Enter Your Email id</label>
           </div>
         </div>
-        <button onClick={handleSubmit} className="btn">
-          Submit
+         <button onClick={handleSubmit} className="btn" disabled={sendingEmail}>
+        {sendingEmail ? (
+                <>
+                Sending....
+                <div className="spinner" />
+                </>
+              ) : (
+                "Submit"
+              )}
         </button>
       </div>
     </div>
