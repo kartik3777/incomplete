@@ -22,13 +22,19 @@ function ResetPassword(props){
              }
         })
     }
+    const[changingPass,setChangingPass]=useState(false);
     const handleSubmit =async (event)=>{
         event.preventDefault();
         if(!data.password || !data.confirmpassword){
           alert("Please fill all details");
           return;
         }
-    
+
+        if(data.password!==data.confirmpassword){
+          alert("Confirm password is not matching with password.");
+          return;
+        }
+        setChangingPass(true);
         try {
           const resetToken = props.resetToken;
             const response = await axios.post(`https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/resetPassword/`, {
@@ -38,10 +44,12 @@ function ResetPassword(props){
             });
             console.log(response.data);
             alert("Password reset successful!");
+            setChangingPass(false);
         } 
         catch (error) {
             console.error('Error resetting password:', error);
             alert("Failed to reset password, please try again.");
+            setChangingPass(false);
         }
     }
 
@@ -54,7 +62,7 @@ function ResetPassword(props){
     return(
     <div className='login-position'>
     <div className='login-box-2'>
-        <div className='reset-heading'>Reset Password</div>
+        <div className='reset-heading'>RESET PASSWORD</div>
           <div className='cont2'>
           <div className="input-field">
             <input
@@ -81,7 +89,16 @@ function ResetPassword(props){
             <label>Confirm Password</label>
           </div>
             </div>
-            <button onClick={handleSubmit} className='btn'>Submit</button>    
+            <button onClick={handleSubmit} className='btn' disabled={changingPass}>
+            {changingPass ? (
+                <>
+                Changing Password....
+                <div className="spinner" />
+                </>
+              ) : (
+                "Submit"
+              )}
+              </button>    
     </div>
     </div>
     )
