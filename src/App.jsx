@@ -1,5 +1,5 @@
 import React, { useState,createContext } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route , useParams } from "react-router-dom";
 import ContactUs from "./pages/ContactUs";
 import NavBar from "./pages/NavBar";
 // import DataTable from "./pages/LogOut";
@@ -40,7 +40,7 @@ import ResetPassword from "./components/authentication/ResetPassword";
 
 
 function App() {
- 
+ const { resetId } = useParams();
   const Api = "https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app"
   // var isWho = "user";
   const [kon, setKon] = useState("user");
@@ -210,7 +210,7 @@ function App() {
              />} />
             <Route path="SignUp" element={<SignUp />} />
             
-            <Route  path={`/resetpassword/:resetToken`} element={<ResetPassword resetToken={resetToken} />} />
+            <Route  path={`/resetpassword/:resetId`} element={<ResetPassword />} />
             <Route path="SignIn" element={<SignIn
              sendDataToParent={getData}
              handleProfId ={handleProfId}
