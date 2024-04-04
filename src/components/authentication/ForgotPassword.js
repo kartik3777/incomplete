@@ -18,7 +18,6 @@ function ForgotPassword(props) {
       };
     });
   }
-  const[sendingEmail,setSendingEmail]=useState(false);
 
   const handleSubmit = async (event) => {
 
@@ -27,7 +26,7 @@ function ForgotPassword(props) {
         alert("Please enter email id to proceed")
         return;
     }
-    setSendingEmail(true);
+
     fetch(
       "https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/forgotPassword",
       {
@@ -46,22 +45,12 @@ function ForgotPassword(props) {
         }
       })
       .then((data) => {
-        //console.log(data);
+        console.log(data);
         alert("A Reset link has been sent to your Email adress.");
-
-         //\\
-        //  \\
-        // here change the data.token name according to data coming from api
-
-        console.log("token from api is: "+ data.resetToken );
-        props.getToken(data.resetToken);
-        setSendingEmail(false);
-        //  props.getToken("cc6fbbf18567274b8f27f37652fc90893efeea8733fa21cbec02c026ec01b1e5");
       })
       .catch((error) => {
         console.error("Error sending token link:", error);
-        alert("User not registered");
-        setSendingEmail(false);
+        alert("Failed to send please try again.");
       });
   };
 
@@ -74,7 +63,7 @@ function ForgotPassword(props) {
   return (
     <div className="login-position">
       <div className="login-box-2">
-        <div className="reset-heading">Reset Password</div>
+        <div className="reset-heading">RESET PASSWORD</div>
         <div className="cont2">
           <div className="input-field">
             <input
@@ -85,18 +74,11 @@ function ForgotPassword(props) {
               type="email"
               required="required"
             />
-            <label>Enter Your Email id</label>
+            <label>Enter Your Email</label>
           </div>
         </div>
-         <button onClick={handleSubmit} className="btn" disabled={sendingEmail}>
-        {sendingEmail ? (
-                <>
-                Sending....
-                <div className="spinner" />
-                </>
-              ) : (
-                "Submit"
-              )}
+        <button onClick={handleSubmit} className="btn">
+          Submit
         </button>
       </div>
     </div>
