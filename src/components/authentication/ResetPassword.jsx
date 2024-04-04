@@ -1,9 +1,10 @@
-import React,{ useState }from "react";
+import React,{ useState,  }from "react";
 import { useParams } from "react-router-dom";
 import axios from 'axios';
 
 function ResetPassword(props){
-     let { id } = useParams();
+  let { id } = useParams();
+  // console.log("end point of resetpassword is: "+ id);
     // const [showPassword, setShowPassword] = useState(false);
     const [data, setData] =useState({
         password: "",
@@ -24,33 +25,25 @@ function ResetPassword(props){
              }
         })
     }
-    const[changingPass,setChangingPass]=useState(false);
     const handleSubmit =async (event)=>{
         event.preventDefault();
         if(!data.password || !data.confirmpassword){
           alert("Please fill all details");
           return;
         }
-
-        if(data.password!==data.confirmpassword){
-          alert("Confirm password is not matching with password.");
-          return;
-        }
-        setChangingPass(true);
+    
         try {
-            
+         
             const response = await axios.post(`https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/resetPassword/${id}`, {
               password: data.password,
               confirmpassword: data.confirmpassword,
             });
             console.log(response.data);
             alert("Password reset successful!");
-            setChangingPass(false);
         } 
         catch (error) {
             console.error('Error resetting password:', error);
             alert("Failed to reset password, please try again.");
-            setChangingPass(false);
         }
     }
 
@@ -90,16 +83,7 @@ function ResetPassword(props){
             <label>Confirm Password</label>
           </div>
             </div>
-            <button onClick={handleSubmit} className='btn' disabled={changingPass}>
-            {changingPass ? (
-                <>
-                Changing Password....
-                <div className="spinner" />
-                </>
-              ) : (
-                "Submit"
-              )}
-              </button>    
+            <button onClick={handleSubmit} className='btn'>Submit</button>    
     </div>
     </div>
     )
