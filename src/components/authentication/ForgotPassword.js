@@ -18,15 +18,16 @@ function ForgotPassword(props) {
       };
     });
   }
+  const[sendingEmail,setSendingEmail]=useState(false);
 
   const handleSubmit = async (event) => {
 
     event.preventDefault();
     if(!data.email){
-        alert("Please enter email id to proceed")
+        alert("Please enter email id to proceed.")
         return;
     }
-
+    setSendingEmail(true);
     fetch(
       "https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/forgotPassword",
       {
@@ -45,12 +46,14 @@ function ForgotPassword(props) {
         }
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         alert("A Reset link has been sent to your Email adress.");
+        setSendingEmail(false);
       })
       .catch((error) => {
         console.error("Error sending token link:", error);
         alert("Failed to send please try again.");
+        setSendingEmail(false);
       });
   };
 
@@ -77,8 +80,15 @@ function ForgotPassword(props) {
             <label>Enter Your Email</label>
           </div>
         </div>
-        <button onClick={handleSubmit} className="btn">
-          Submit
+        <button onClick={handleSubmit} className="btn" disabled={sendingEmail}>
+        {sendingEmail ? (
+                <>
+                Sending....
+                <div className="spinner" />
+                </>
+              ) : (
+                "Submit"
+              )}
         </button>
       </div>
     </div>
