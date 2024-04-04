@@ -25,12 +25,19 @@ function ResetPassword(props){
              }
         })
     }
+    const[changingPass,setChangingPass]=useState(false);
     const handleSubmit =async (event)=>{
         event.preventDefault();
         if(!data.password || !data.confirmpassword){
           alert("Please fill all details");
           return;
         }
+
+        if(data.password!==data.confirmpassword){
+          alert("Confirm password is not matching with password.");
+          return;
+        }
+        setChangingPass(true);
     
         try {
          
@@ -38,12 +45,14 @@ function ResetPassword(props){
               password: data.password,
               confirmpassword: data.confirmpassword,
             });
-            console.log(response.data);
-            alert("Password reset successful!");
+           // console.log(response.data);
+            alert("Password reset successfull!");
+            setChangingPass(false);
         } 
         catch (error) {
             console.error('Error resetting password:', error);
             alert("Failed to reset password, please try again.");
+            setChangingPass(false);
         }
     }
 
@@ -83,7 +92,16 @@ function ResetPassword(props){
             <label>Confirm Password</label>
           </div>
             </div>
-            <button onClick={handleSubmit} className='btn'>Submit</button>    
+           <button onClick={handleSubmit} className='btn' disabled={changingPass}>
+            {changingPass ? (
+                <>
+                Changing....
+                <div className="spinner" />
+                </>
+              ) : (
+                "Submit"
+              )}
+              </button>        
     </div>
     </div>
     )
