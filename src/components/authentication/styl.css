@@ -173,6 +173,17 @@ margin: 10px;
   color: #fff;
   outline: none;
 }
+.input-field select{
+  width: 383px;
+ height: 55px;
+ border-radius: 6px;
+ font-size: 18px;
+ padding: 0 15px;
+ border: 2px solid #fff;
+ background: transparent;
+ color: #fff;
+ outline: none;
+}
 .input-field label{
   position: absolute;
   top: 50%;
