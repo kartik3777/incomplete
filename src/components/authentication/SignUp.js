@@ -6,6 +6,23 @@ import './styl.css'
 
 function SignUp(){
 
+    const departments = [
+        "Aerospace Engineering",
+        "Biological Sciences and Bio-Engineering",
+        "Chemical Engineering",
+        "Civil Engineering",
+        "Computer Science and Engineering",
+        "Electrical Engineering",
+        "Materials Science and Engineering",
+        "Mechanical Engineering",
+        "Chemistry",
+        "Earth Sciences",
+        "Economics",
+        "Mathematics and Scientific Computing",
+        "Physics",
+        "Statistics and Data Science"
+    ];
+
     function handleOTP(){   
         if (!data.email) {
             alert("Please provide an email address.");
@@ -60,6 +77,7 @@ function SignUp(){
 
    function handleChange(e){
    const {name, value} = e.target;
+
    if(name ==="OTP"){
     setOTP(value)
    }
@@ -102,6 +120,15 @@ function SignUp(){
 
     if (data.OTP !== OTPData.otp) {
         alert("OTP verification failed. Please try again.");
+        return;
+    }
+    const floatValue = parseFloat(data.cpi);
+    if (isNaN(floatValue) || floatValue < 0 || floatValue > 10) {
+        alert('Please enter a valid CPI between 0 and 10.');
+        return; 
+    }
+    if(data.rollno<0){
+        alert("Roll No cannot be negative.");
         return;
     }
     
@@ -187,8 +214,12 @@ function SignUp(){
                     <label>Enter OTP</label>
                  </div>
                  <div className='input-field'>
-                    <input  onKeyPress={handleKeyPress} onChange={handleChange} value={data.department} name='department' type="text"required="required"/> 
-                    <label>Department</label>
+                    <select onKeyPress={handleKeyPress} onChange={handleChange} value={data.department} name='department' required="required">
+                                <option value="">Select Department</option>
+                                {departments.map((department, index) => (
+                                    <option key={index} value={department} style={{ color: 'black' }}>{department}</option>
+                                ))}
+                    </select>
                  </div>
                  <div className='input-field'>
                     <input  onKeyPress={handleKeyPress} onChange={handleChange} value={data.cpi} name='cpi' type="text"required="required"/> 
