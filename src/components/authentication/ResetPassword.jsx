@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from 'axios';
 
 function ResetPassword(props){
- const { resetId } = useParams();
+ let { id } = useParams();
   // console.log("end point of resetpassword is: "+ id);
     // const [showPassword, setShowPassword] = useState(false);
     const [data, setData] =useState({
@@ -34,14 +34,14 @@ function ResetPassword(props){
         }
 
         if(data.password!==data.confirmpassword){
-          alert("Confirm password is not matching with password.");
+          alert("Passwords are not matching.");
           return;
         }
         setChangingPass(true);
     
         try {
          
-            const response = await axios.post(`https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/resetPassword/${resetId}`, {
+            const response = await axios.post(`https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/resetPassword/${id}`, {
               password: data.password,
               confirmpassword: data.confirmpassword,
             });
