@@ -97,6 +97,9 @@ function SignUp(){
    if(name ==="OTP"){
     setOTP(value)
    }
+  if(name==="cpi"){
+    e.target.value = `${value}`;
+  }
      setData((prevValue) => {
         return {
             ...prevValue,
@@ -247,7 +250,7 @@ function SignUp(){
                     </select>
                  </div>
                  <div className='input-field'>
-                    <input  onKeyPress={handleKeyPress} onChange={handleChange} value={data.cpi} name='cpi' type="text"required="required"/> 
+                    <input  onKeyPress={handleKeyPress} onChange={handleChange} value={data.cpi} name='cpi' type="number"required="required"/> 
                     <label>Cpi</label>
                  </div>
                  <div className='input-field'>
