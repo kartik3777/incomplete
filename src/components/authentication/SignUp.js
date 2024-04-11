@@ -4,6 +4,18 @@ import { Link } from 'react-router-dom';
 // const nodemailer = require('nodemailer');
 import './styl.css'
 
+function IsValidIITKEmail(email) {
+    const iitkEmailRegex = /^[a-z][a-z0-9._]+@(iitk.ac.in)$/;
+    return iitkEmailRegex.test(email);
+  }
+  
+
+ function IsValidGoogleDriveLink(link) {
+    if(link.includes("drive.google.com")) return true;
+    else return false;
+  }
+  
+
 function SignUp(){
 
     const departments = [
@@ -26,6 +38,10 @@ function SignUp(){
     function handleOTP(){   
         if (!data.email) {
             alert("Please provide an email address.");
+            return;
+        }
+        if(!IsValidIITKEmail(data.email)){
+            alert("Please provide your valid IITK Email.");
             return;
         }
         setLoadingOTP(true);
@@ -89,8 +105,8 @@ function SignUp(){
      })
    }
 
-   function handleClick(){
-
+   function handleClick(e){
+    e.preventDefault();
     if (
         !data.name ||
         !data.rollno ||
@@ -105,6 +121,11 @@ function SignUp(){
         alert("Please fill all the details");
         return;
     }
+    if(!IsValidGoogleDriveLink(data.resumeLink)){
+        alert("Please give a valid resume drive link.");
+        return;
+    }
+
 
     if (data.password !== data.confirmpassword) {
         alert("Passwords do not match");
@@ -129,6 +150,10 @@ function SignUp(){
     }
     if(data.rollno<0){
         alert("Roll No cannot be negative.");
+        return;
+    }
+    else if(data.rollno<190000 || data.rollno>24000000){
+        alert("Please provide your valid IITK rollno.");
         return;
     }
     
