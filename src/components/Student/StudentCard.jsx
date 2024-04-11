@@ -20,7 +20,7 @@ function ProjectCategoriesCard(props) {
             <h3>{props.domain}</h3>
           </div>
           <Link to="/ProjectPage">
-            <button onClick={handleExplore} className='Explore'>
+            <button onClick={handleExplore} className='Explore' style={{ zIndex: 20 }}>
               Explore
             </button>
           </Link>
