@@ -12,11 +12,12 @@ function TotalProjects(props) {
     // console.log(props.studentsRequested);
     props.req(props.studentsRequested);
     // props.getProjectId(props.projectId);
-    console.log("request button clicked");
+    //console.log("request button clicked");
     setTimeout(function () {
+      //console.log("Hi man");
       props.getProjectId(props.projectId);
-      console.log('project id sended after 2s');
-      console.log(props.projectId);
+      //console.log('project id sended after 2s');
+      //console.log(props.projectId);
     }, 2000);
   }
 
@@ -24,21 +25,21 @@ function TotalProjects(props) {
    // setStudentReq(props.studentsRequested);
     // console.log("inside handleReq");
     // console.log(props.studentsRequested);
-    console.log("enrolled clicked");
+    //console.log("enrolled clicked");
     props.en(props.studentsEnrolled);
-    console.log("student enrolled sended from project list");
-    console.log(props.studentsEnrolled);
+    //console.log("student enrolled sended from project list");
+    //console.log(props.studentsEnrolled);
     // props.getProjectId(props.projectId);
-    console.log("enrolled clicked");
+    //console.log("enrolled clicked");
     setTimeout(function () {
       props.getProjectId(props.projectId);
-      console.log('project id sended after 2s');
-      console.log(props.projectId);
+      //console.log('project id sended after 2s');
+     // console.log(props.projectId);
     }, 2000);
   }
 
 
-  console.log("inside total projects "+ props.projectId);
+  //console.log("inside total projects "+ props.projectId);
   // console.log("students requestedd");
   // console.log(props.studentsRequested);
   const [showDetails, setShowDetails] = useState(false);
@@ -66,13 +67,13 @@ function TotalProjects(props) {
     if(badBtn === "Delete"){
       const id = props.projectId;
       //65f3aa5e975d1df0ecd948a1
-      console.log(id);
-      console.log("inside delete function");
+      //console.log(id);
+     // console.log("inside delete function");
       const url = `https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/professor/deleteproject/${id}`;
       const response = await axios.delete(url);
       alert(response.data.message);
       document.getElementById("delete-vala-btn").innerText ="Deleted!";
-      console.log(response);
+      //console.log(response);
     }else{
       alert("project deleted!!");
     }
@@ -82,14 +83,14 @@ function TotalProjects(props) {
   return (
     <div className={`each-project ${showDetails ? 'expanded' : ''}`} id={`project-${props.index}`}>
       <h2>{props.name}</h2>
-     
+      <button id={`expand-button-${props.index}`} onClick={expand} 
+        style={{ backgroundColor: 'white', color: 'blue',border: '2px solid blue' }}>
+        {showDetails ? "Show Less" : "Show More"}</button>
       <p>{props.details}</p>
       <div className="normal-details">
       <Link className="a" to="/EnrolledStudents"><button onClick={handleEnrolled} >Enrolled Students</button></Link>
       <Link className="a" to="/Requests"><button onClick={handleReq}>Requests</button></Link>
         
-        
-        <button id={`expand-button-${props.index}`} onClick={expand}>{showDetails ? "Show Less" : "Show More"}</button>
       </div>
       {showDetails && (
         <div className="side-karo">
@@ -121,11 +122,12 @@ function Project_list_prof(props) {
 
   const [facultyData, setFacultyData] = useState(null);
   const [loading, setLoading] = useState(true);
-  
-  const fetchData = async () => {
+
+  useEffect(()=> {
+   const fetchData = async () => {
     try {
       const uniqueID = props.profId;
-      console.log("unique id in projects listsis: "+ uniqueID);
+     // console.log("unique id in projects listsis: "+ uniqueID);
       const url = `https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/faculty/${uniqueID}`;
       const response = await fetch(url); //"abhas" should be replaced by "unique id" of professor signed in
       if (!response.ok) {
@@ -133,18 +135,16 @@ function Project_list_prof(props) {
       }
       const data = await response.json();
       setFacultyData(data);
-      console.log("data in prof project list");
-      console.log(data);
+     // console.log("data in prof project list");
+      //console.log(data);
       setLoading(false);
     } catch (error) {
-      console.error('Error fetching faculty data:', error);
+      //console.error('Error fetching faculty data:', error);
       setLoading(false); //chnaged true from false
     }
   };
-  
-
-
-  fetchData();
+   fetchData();
+},[]);
   // useEffect(() => {
   
   //   fetchData();
