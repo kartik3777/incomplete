@@ -7,32 +7,41 @@ import Loader from '../components/Faculty/Loader'
 
 const FacultyCard = (props) => {
 
+  const [accepting, setAccepting] = useState(false);
+  const [rejecting, setRejecting] = useState(false);
+
  const handleAccept = async () => {
-   console.log("project id in raccepting is: "+props.projectId);
+  setAccepting(true);
+  // console.log("project id in raccepting is: "+props.projectId);
   const url = `https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/professor/approveproject/${props.projectId}/${props.rollno}`;
     try {
       const response = await axios.get(
         url
       );
-      console.log("Project accepted!!!!!!!!"+ response.data); 
-      alert("accepted")    
+     // console.log("Project accepted!!!!!!!!"+ response.data); 
+      alert("accepted") ;
+      setAccepting(false);   
     } catch (error) {
       console.error("Error accepting a request:", error);
-      alert("error in accepting the project")
+      alert("error in accepting the project");
+      setAccepting(false);
     }
   }
  const handleReject = async () => {
-   console.log("project id in raccepting is: "+props.projectId);
+  setRejecting(true);
+  // console.log("project id in raccepting is: "+props.projectId);
   const url = `https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/professor/rejectproject/${props.projectId}/${props.rollno}`;
     try {
       const response = await axios.get(
         url
       );
-      console.log("Project rejected!!!!!!!!"+ response.data); 
-      alert("rejected")    
+     // console.log("Project rejected!!!!!!!!"+ response.data); 
+      alert("rejected");
+      setRejecting(false);    
     } catch (error) {
       console.error("Error rejecting a request:", error);
-      alert("error in rejecting the project")
+      alert("error in rejecting the project");
+      setRejecting(false);
     }
   }
 
@@ -61,8 +70,12 @@ const FacultyCard = (props) => {
      </p>
    </div>
    <div className="card-actions">
-     <button  onClick={handleAccept} className="accept-button">Accept</button>
-     <button onClick={handleReject} className="reject-button">Reject</button>
+   <button onClick={handleAccept} className="accept-button" disabled={accepting || rejecting}>
+          {accepting ? "Accepting..." : "Accept"}
+        </button>
+        <button onClick={handleReject} className="reject-button" disabled={accepting || rejecting}>
+          {rejecting ? "Rejecting..." : "Reject"}
+        </button>
    </div>
        </div>
      :  <div className='facultycard'><h1>No student has requested this project.</h1></div>
@@ -82,8 +95,9 @@ const Requests = (props) => {
   const requestedStudentList = props.my;
   // var lengthOfStuddent = requestedStudentList.length;
   var id =requestedStudentList[0] ;
-  console.log("requested called!!");
-  console.log(requestedStudentList);
+  
+  //console.log("requested called!!");
+  //console.log(requestedStudentList);
   // const requestedStudentList = props.my; // Replace with your actual list of student IDs
   const [studentDataArray, setStudentDataArray] = useState([]); // Initialize an empty array
   const [loading, setLoading] =useState(true);
@@ -96,8 +110,8 @@ const Requests = (props) => {
           throw new Error('Failed to fetch student data');
         }
         const data = await response.json();
-        console.log("this is request data");
-        console.log(data);
+       // console.log("this is request data");
+        //console.log(data);
         // Create a new object with relevant properties from data.user
         const studentData = {
           name: data.user.name,
@@ -109,8 +123,8 @@ const Requests = (props) => {
         };
         // Update the array by adding the new studentData
         setStudentDataArray((prevArray) => [...prevArray, studentData]);
-        console.log("Student requested data for ID", id);
-        console.log(studentDataArray);
+        //console.log("Student requested data for ID", id);
+        //console.log(studentDataArray);
         setLoading(false); 
       } catch (error) {
         console.error('Error fetching student data:', error);
@@ -122,20 +136,28 @@ const Requests = (props) => {
       fetchData(id);
     });
   }, [requestedStudentList]); // Observe changes in requestedStudentList
+  const flag= studentDataArray.length===0 ;
+  const uniqueStudentDataArraySet= new Set();
+  studentDataArray.forEach((item) => {
+    if(item._id){
+      uniqueStudentDataArraySet.add(item);
+    }
+  });
+  const uniqueStudentDataArray = Array.from(uniqueStudentDataArraySet);
+  //console.log("length of the array:", uniqueStudentDataArray.length);
 
-
+if(flag){
+    return <h1 style={{textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh'}}>There are currently no pending student requests for this project.</h1>
+}
+else{
   return (
     <div>
       <div className='requestContainer'>
-        {/* {requestedData && requestedData.map((item, index) => ( */}
-       {/* { useEffect(() => {
-        console.log("inside useeffect");
-        console.log(id); */}
         {loading ? (
           <Loader /> 
         ): (
 
-           studentDataArray && studentDataArray.map((item, index) => {
+          uniqueStudentDataArray && uniqueStudentDataArray.map((item, index) => {
             return (
               <FacultyCard 
               key ={index}
@@ -151,19 +173,10 @@ const Requests = (props) => {
             )
           }) 
         )} 
-        {/* },[id])} */}
-       
-        {/* <FacultyCard 
-              name ={reqName}
-              email ={reqEmail}
-              cpi = {cpi}
-             rollno ={rollno}
-             id={_id} 
-              /> */}
-        {/* ))} */}
       </div>
     </div>
   );
+  }
 };
 
 export default Requests;
