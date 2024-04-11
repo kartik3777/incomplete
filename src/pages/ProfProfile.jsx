@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "./ProfProfile.css";
 import axios from 'axios';
+import Loader from '../components/Faculty/Loader';
 
 const ProfProfile = (props) => {
 const [user, setUser] = useState({
@@ -10,7 +11,7 @@ const [user, setUser] = useState({
   office: '',
   researchWork: '',
 })
-
+const [loading, setLoading] = useState(true);
 
 useEffect(() => {
   const fetchData = async () => {
@@ -20,7 +21,7 @@ useEffect(() => {
       const response = await axios.get(url);
 
       // Handle the fetched data (e.g., update state or perform other actions)
-      console.log(response.data);
+     // console.log(response.data);
 
       setUser({
         name: response.data.name,
@@ -29,18 +30,21 @@ useEffect(() => {
         office: response.data.address,
         researchWork: response.data.research,
       });
-      console.log(user);
-
+      //console.log(user);
+      setLoading(false);
      
     } catch (error) {
       console.error('Error fetching faculty profile:', error);
-     
+      setLoading(false);
     }
   };
 
   fetchData(); // Call the fetchData function when the component mounts
 }, [props.profId]); // Run the effect whenever props.profId changes
-
+   
+if (loading) {
+  return <Loader/>; 
+}
   
   return (
     <div className='Container'>
