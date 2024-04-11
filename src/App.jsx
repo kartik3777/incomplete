@@ -69,31 +69,37 @@ function App() {
     function handleProfId(x){
      setProfId(x);
     //  console.log(x);
-     console.log("profid in appjsx is: "+profId);
+     //console.log("profid in appjsx is: "+profId);
     }
 
     function handleEn(array){
-      console.log("data recieved of enrolled in app");
-      console.log(array);
+      //console.log("data recieved of enrolled in app");
+      //console.log(array);
       const i = array.length;
-      console.log(i);
-      for(var x =0; x<i; x++){
-        acceptedBachhe.push(array[x]);
-      } 
-      console.log("after loop enrolled");
-      console.log(acceptedBachhe);
+      //console.log(i);
+      const uniqueSet = new Set([...acceptedBachhe, ...array]);
+           const uniqueArray = [...uniqueSet];
+           acceptedBachhe.splice(0, acceptedBachhe.length); // Empty the 'my' array
+          uniqueArray.forEach(element => {
+            acceptedBachhe.push(element); // Push unique elements into the 'my' array
+            });
+      //console.log("after loop enrolled");
+      //console.log(acceptedBachhe);
     }
 
     function handleReq(array){
-      console.log("data recieved in app.jsx");
-           console.log(array);
+      //console.log("data recieved in app.jsx");
+        //   console.log(array);
            const i = array.length;
-           console.log(i);
-           for(var x =0; x<i; x++){
-            my.push(array[x]);
-           } 
-           console.log("after loop");
-           console.log(my);
+          // console.log(i);
+           const uniqueSet = new Set([...my, ...array]);
+           const uniqueArray = [...uniqueSet];
+           my.splice(0, my.length); // Empty the 'my' array
+          uniqueArray.forEach(element => {
+             my.push(element); // Push unique elements into the 'my' array
+            });
+           //console.log("after loop");
+           //console.log(my);
     };
   const getData = (isAuth, who, ikartik) => {
     // Handle data from child component
@@ -173,7 +179,9 @@ function App() {
                   <Route path="Phy" element={<Phy getFacultyIdForProject={getFacultyIdForProject} />} />
                 </Route>
                 <Route path="ContactUs" element={<ContactUs />} />
-                <Route path="OneProfProjects" element={<OneProfProjects facultyIdForProject={facultyIdForProject} />} />
+                <Route path="OneProfProjects" element={<OneProfProjects 
+                facultyIdForProject={facultyIdForProject}
+                logedInStudentData ={logedInStudentData} />} />
                 <Route index element={<Home />} />
                 <Route path="Home" element={<Home />} />
                 <Route path="LogOut" element={<LogOut onLogout={handleLogout} />} />
@@ -199,7 +207,7 @@ function App() {
   }
 
   else {
-    console.log("reset Token is: "+ resetToken);
+   // console.log("reset Token is: "+ resetToken);
     return (
       <>
         <BrowserRouter>
