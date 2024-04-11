@@ -6,7 +6,6 @@ import "./ProjectDesc.jsx";
 import { Link } from "react-router-dom";
 import Loader from '../Faculty/Loader';
 
-let count=0;
 
 function TotalProjects(props) {
   // console.log(props.rollno);
@@ -18,12 +17,12 @@ function TotalProjects(props) {
     const projectDiv = document.getElementById(`project-${props.index}`);
     const button = document.getElementById(`expand-button-${props.index}`);
 
-    if (projectDiv.style.height === "370px") {
+    if (projectDiv.style.height === "auto") {
       button.innerText = "Show More";
       projectDiv.style.height = "150px";
     } else {
       button.innerText = "Show Less ";
-      projectDiv.style.height = "370px";
+      projectDiv.style.height = "auto";
     }
   }
 
@@ -33,9 +32,6 @@ function TotalProjects(props) {
   const handleSubmit = async (e) => {
     if(props.students>=props.maxstudents){
       alert("Regrettably, you cannot apply for this project as the total selected capacity has been reached.");
-    }
-    if(count>0){
-      alert("You are unable to request multiple projects within a single login session. Please log out, refresh the page, and then log in again to request another project.");
       return;
     }
     if(props.total>=5){
@@ -60,6 +56,10 @@ function TotalProjects(props) {
         return;
       }
     }
+    const confirmation = window.confirm("Are you sure you want to proceed with this project request? This action cannot be undone.");
+    if(!confirmation){
+      return ;
+    }
     setLoading(true);
     e.preventDefault();
     const btnData = document.getElementById("request-vala-button").innerText;
@@ -74,10 +74,9 @@ function TotalProjects(props) {
         // console.log(response.status);
         setLoading(false);
         if (response.status === 201) {
-          console.log(response);
+         // console.log(response);
           document.getElementById("request-vala-button").innerText =  "Requested!!";
           alert("You have succesfully Requested this project!");
-          count+=1;
         } else {
           console.error('Failed to create project');
         }
@@ -102,26 +101,26 @@ function TotalProjects(props) {
       ):(
       <div>
       <h2>{props.name}</h2>
+      <button id={`expand-button-${props.index}`} onClick={expand}>
+          Show More
+      </button>
       <p>{props.details}</p>
-      <div className="normal-details">
-        <h4 style={{ color: "blue" }}>
+      {/* <div className="normal-details"> 
+      </div> */}
+      <div className="side-karo">
+        <div className="expanded-details">
+        <span style={{ color: "blue" }}>
           Cpi Required:{" "}
           <span style={{ color: "black", fontWeight: "500", fontSize: "15px" }}>
             {props.cpi}
           </span>
-        </h4>
-        <h4 style={{ color: "blue" }}>
+        </span>
+        <span style={{ color: "blue" }}>
           Pre-Requisite:{" "}
           <span style={{ color: "black", fontWeight: "500", fontSize: "15px" }}>
             {props.preReq}
           </span>
-        </h4>
-        <button id={`expand-button-${props.index}`} onClick={expand}>
-          Show More
-        </button>
-      </div>
-      <div className="side-karo">
-        <div className="expanded-details">
+        </span>
           <span style={{ color: "blue", fontWeight: "530" }}>
             Professor :{" "}
             <span
@@ -170,6 +169,12 @@ function ProjectCategory(props) {
 
   const [facultyData, setFacultyData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loading1, setLoading1] = useState(true);
+  const [user, setUser] = useState({
+    arrRequested:[],
+    arrAccepted:[],
+    arrRejected:[]
+}) 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -177,7 +182,7 @@ function ProjectCategory(props) {
         const response = await axios.get(
           `https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/faculty/projects/?projectCategory=${props.CategoryName}`
         );
-        console.log(response.data);
+       // console.log(response.data);
         setFacultyData(response.data); // Assuming the response contains an array of faculty data
         setLoading(false);
       } catch (error) {
@@ -188,9 +193,38 @@ function ProjectCategory(props) {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const uniqueId = props.logedInStudentData._id;
+        const url = `https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/getuserinfo/${uniqueId}`;
+        const response = await axios.get(url);
+  
+        // Handle the fetched data (e.g., update state or perform other actions)
+       // console.log(response);
+  
+        setUser({
+          arrRequested: response.data.user.projectsRequested,
+          arrAccepted: response.data.user.projectsEnrolled,
+          arrRejected:response.data.user.projectsRejected
+        });
+       // console.log(user);
+        setLoading1(false);
+       
+      } catch (error) {
+        console.error('Error fetching student profile:', error);
+        setLoading1(false);
+       
+      }
+    };
+  
+    fetchData(); // Call the fetchData function when the component mounts
+  }, [props.logedInStudentData._id]);
+
   // console.log("faculty data is",facultyData);
 
-  if(loading){
+  if(loading || loading1){
     return <Loader /> ;
   }
 
@@ -204,7 +238,7 @@ function ProjectCategory(props) {
 
         {
           facultyData.map((item, index) => {
-            console.log("prof name in list::::"+ item.offeredByProf.name);
+           // console.log("prof name in list::::"+ item.offeredByProf.name);
             return (
               
               <TotalProjects
@@ -233,46 +267,15 @@ function ProjectCategory(props) {
                 logedInStudentData={props.logedInStudentData}
                 id = {props.ProjectDetails}
                 rollno={props.rollno}
-                total={props.logedInStudentData.projectsRequested.length}
-                arrRequest={props.logedInStudentData.projectsRequested}
-                arrAccept={props.logedInStudentData.projectsEnrolled}
-                arrReject={props.logedInStudentData.projectsRejected}
+                total={user. arrRequested.length}
+                arrRequest={user.arrRequested}
+                arrAccept={user.arrAccepted}
+                arrReject={user.arrRejected}
 
               />
             );
           })
         }
-
-        {/* {facultyData.map((item) => {
-  // console.log(item.name);
-
-  return item.projects.map((iterator, index) => {
-    // console.log(item.name + index); // Corrected: Wrap in curly braces
-    return (
-      <TotalProjects
-        key={index}
-        index ={iterator._id}
-        // index={item.name + index} // Note: You might want to use a unique identifier here
-        name={iterator.name}
-        Name={iterator.name}
-        email={iterator.email}
-        details={iterator.description}
-        cpi={iterator.cpirequired}
-        category ={iterator.projectCategory}
-        batches={iterator.openfor}
-        additional={iterator.Openfor}
-        preReq={iterator.openfor}
-        resume={iterator.resumerequired}
-        students={iterator.studentRegistered}
-        total={iterator.maxstudents}
-        isResume={iterator.resumerequired}
-        isRequest={iterator.isRequest}
-      />
-    );
-  });
-})} */}
-
-
       </div>
     </div>
   );
