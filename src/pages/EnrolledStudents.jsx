@@ -22,7 +22,7 @@ const FacultyCard = (props) => {
           </a>{" "}
         </p>
         {/* <button  className="accept-button">ACCEPT</button> */}
-        <button className="reject-button">Remove Student</button>
+        {/* <button className="reject-button">Remove Student</button> */}
       </div>
     ) : (
       <div className="facultycard">
@@ -81,6 +81,9 @@ const EnrolledStudents = (props) => {
 
   return (
     <div>
+      {uniqueStudents.length===0 ? (
+          <h1 style={{textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh'}}>No student has been enrolled in this project.</h1>
+        ): (
       <div className="requestContainer">
         {uniqueStudents.map((item, index) => (
           <FacultyCard
@@ -96,6 +99,7 @@ const EnrolledStudents = (props) => {
           />
         ))}
       </div>
+        )}
     </div>
   );
 };
