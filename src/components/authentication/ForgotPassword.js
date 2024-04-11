@@ -52,7 +52,7 @@ function ForgotPassword(props) {
       })
       .catch((error) => {
         console.error("Error sending token link:", error);
-        alert("Failed to send please try again.");
+        alert("Failed to send please try again. Ensure that it is the same email with which you are registered.");
         setSendingEmail(false);
       });
   };
