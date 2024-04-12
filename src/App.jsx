@@ -1,5 +1,5 @@
-import React, { useState,createContext } from "react";
-import { BrowserRouter, Routes, Route , useParams } from "react-router-dom";
+import React, { useState,createContext, useEffect } from "react";
+import { BrowserRouter, Routes, Route , useParams, Switch, Redirect, useNavigate } from "react-router-dom";
 import ContactUs from "./pages/ContactUs";
 import NavBar from "./pages/NavBar";
 // import DataTable from "./pages/LogOut";
@@ -40,6 +40,7 @@ import ResetPassword from "./components/authentication/ResetPassword";
 
 
 function App() {
+ 
  const { resetId } = useParams();
   const Api = "https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app"
   // var isWho = "user";
