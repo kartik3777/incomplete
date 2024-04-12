@@ -53,7 +53,7 @@ function Prof(props) {
           const response = await axios.get(
             url
           );
-          console.log(response.data);
+        //  console.log(response.data);
           setFacultyData(response.data);
           setLoading(false);       
         } catch (error) {
