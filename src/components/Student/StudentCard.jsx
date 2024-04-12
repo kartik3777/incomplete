@@ -79,7 +79,7 @@ const uniqueCategoriesArray = Array.from(uniqueCategoriesSet);
             
             {
                 uniqueCategoriesArray.map((item, index)=>{
-                  console.log(item);
+                //  console.log(item);
                     return(
                         <ProjectCategoriesCard
                         key ={index}
