@@ -56,6 +56,26 @@ function App() {
     const my =[];
     const acceptedBachhe = [];
 
+    useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      if (isAuthorized && kon === 'user') {
+        event.preventDefault();
+        event.returnValue = ''; // Required for Chrome
+        //navigate('/Home');
+      } else if (isAuthorized && kon === 'faculty') {
+        event.preventDefault();
+        event.returnValue = ''; // Required for Chrome
+       // navigate('/Home');
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [isAuthorized, kon]);
+
     function getProjectId(x){
       setProjectId(x);
     }
