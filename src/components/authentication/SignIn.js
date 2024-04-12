@@ -51,8 +51,8 @@ function SignIn(props) {
 
       const resp = await response.json();
       setIkartik(resp.data.user);
-      console.log("data of student logging in!!!!!!!!!!");
-      console.log(resp.data.user);
+      //console.log("data of student logging in!!!!!!!!!!");
+      //console.log(resp.data.user);
       setRoll(resp.data.user.rollno);
 
       if (resp.status === "success") {
@@ -126,8 +126,8 @@ function SignIn(props) {
       const response = await axios.post(url, {
         email: email,
       });
-      console.log("when faculty login....");
-      console.log(response);
+     // console.log("when faculty login....");
+     // console.log(response);
       props.handleProfId(uniqueId);
       // alert("yes, you are there")
       setAuthorized(true);
