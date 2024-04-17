@@ -29,8 +29,12 @@ function TotalProjects(props) {
     if(props.students>=props.maxstudents){
       alert("Regrettably, you cannot apply for this project as the total selected capacity has been reached.");
     }
+    if(props.arrAccept.length>=1){
+      alert("You are already enrolled in a project. So, you can't request any more.");
+      return;
+    }
     if(props.total>=5){
-      alert("You have surpassed the limit for requesting projects.");
+      alert("You already have as many as 5 pending requests. Wait till any of those is accepted or rejected.");
       return;
     }
     for(let i=0; i<props.arrRequest.length; i++){
