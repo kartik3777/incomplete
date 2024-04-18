@@ -102,17 +102,9 @@ const Requests = (props) => {
   const [studentDataArray, setStudentDataArray] = useState([]); // Initialize an empty array
   const [loading, setLoading] =useState(true);
 
-  const HandleReject = async (projectId, rollno) => {
-    const url = `https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/professor/rejectproject/${projectId}/${rollno}`;
-    try {
-      const response = await axios.get(url);
-    } catch (error) {
-      console.error("Error rejecting a request:", error);
-    }
-  };
-
   useEffect(() => {
     const fetchData = async (id) => {
+     // setLoading(true);
       try {
         const response = await fetch(`https://cs253backederror404teamnotfoundmohammaadnasarsiddiqui.vercel.app/api/user/getuserinfo/${id}`);
         if (!response.ok) {
@@ -128,19 +120,19 @@ const Requests = (props) => {
           cpi: data.user.cpi,
           rollno: data.user.rollno,
           _id: data.user._id,
-          resumeLink: data.user.resumeLink
+          resumeLink: data.user.resumeLink,
+          accepted: data.user.projectsEnrolled
         };
-         if(studentData.acceptLength){
-          HandleReject(props.projectId, studentData.rollno);
-        }
-        else{
         // Update the array by adding the new studentData
+        if(studentData.accepted.length===0){
         setStudentDataArray((prevArray) => [...prevArray, studentData]);
         }
         //console.log("Student requested data for ID", id);
         //console.log(studentDataArray);
+        setLoading(false); 
       } catch (error) {
         console.error('Error fetching student data:', error);
+        setLoading(false);
       }
     };
 
@@ -148,8 +140,7 @@ const Requests = (props) => {
       fetchData(id);
     });
   }, [requestedStudentList]); // Observe changes in requestedStudentList
-
-  setLoading(false);
+  //setLoading(false);
   const flag= studentDataArray.length===0 ;
   const uniqueStudentDataArraySet= new Set();
   studentDataArray.forEach((item) => {
