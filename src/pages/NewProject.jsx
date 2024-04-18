@@ -9,6 +9,7 @@ function NewProject(props) {
 
   const [facultyData, setFacultyData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const[custom, setCustom]= useState(false);
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -57,6 +58,18 @@ const uniqueCategoriesArray = Array.from(uniqueCategoriesSet);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if(name==="projectCategory" && value==="other"){
+      setCustom(true); 
+      return;
+    }
+    else if(name==="projectCategory"){
+      let flag= false;
+      for(let i=0; i<uniqueCategoriesArray.length;i++){
+      if(uniqueCategoriesArray[i].projectCategory===value){
+       flag=true; }}
+      if(flag){
+      setCustom(false); return;}
+    }
     if(name==="maxstudents"){
       e.target.value = `${value}`;
     }
@@ -119,7 +132,7 @@ const uniqueCategoriesArray = Array.from(uniqueCategoriesSet);
     } catch (error) {
       console.error('Error creating project:', error.message);
     }finally {
-      setSaving(false); 
+      setSaving(false); setCustom(false);
     }
   };
   if (loading) {
@@ -183,11 +196,11 @@ const uniqueCategoriesArray = Array.from(uniqueCategoriesSet);
                <option value="other">Other(Custom)</option>
           </select>
 
-          {formData.projectCategory === "other" && (
+          {custom && (
             <input
             type="text"
             id="other-category"
-            name="otherCategory"
+            name="projectCategory"
             placeholder="Enter custom category"
             onChange={handleChange}
             />
